@@ -1,0 +1,29 @@
+{
+  "name": "rutgers-virtual-flyer",
+  "version": "1.0.0",
+  "description": "User story  Rutgers Virtual Flyer. There's a lot to do / eat / see / play at Rutgers. We need an effective way to categorize it all! Your app should have a user creation / login system. It should have a way to add places for everyone to see. Only authenticated users can leave reviews and ratings. There should be a basic filter that lets users narrow down what they want to search for (only 5 star places, restaurants, etc).",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JamesonCodes/rutgers-virtual-flyer.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JamesonCodes/rutgers-virtual-flyer/issues"
+  },
+  "homepage": "https://github.com/JamesonCodes/rutgers-virtual-flyer#readme",
+  "dependencies": {
+    "express": "^4.13.4",
+    "express-handlebars": "^3.0.0",
+    "express-session": "^1.13.0",
+    "mysql": "^2.10.2",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "sequelize": "^3.19.3"
+  }
+}
