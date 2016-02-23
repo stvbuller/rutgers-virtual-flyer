@@ -11,6 +11,9 @@ var connection = new Sequelize('class_app_db', 'root');
 var passport = require('passport');
 var passportLocal = require('passport-local');
 //middleware init
+app.use("/js", express.static("public/js"));
+app.use("/css", express.static("public/css"));
+app.use("/img", express.static("public/img"));
 app.use(require('express-session')({
     secret: 'crackalackin',
     resave: true,
