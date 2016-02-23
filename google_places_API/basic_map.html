@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <!--GOOGLE MAPS API SCRIPT-->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyB94SDmdMuZ9uzP9NHmdvNglws1C-tFhHA"></script>
+    <title>Rutgers Open House : Google Maps API</title>
+
+    <!--PUT THIS IS JS FILE-->
+    <script>
+      var map;
+      function initialize() {
+        //center: centers the map somewhere
+        var center = new google.maps.LatLng(40.5008227,-74.4495878); //lat,long @ Rutgers U
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: center,
+          zoom: 10 //the level of zoom 1 is whole globe (higher number = more zoom)
+
+        });
+      }
+      google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+
+
+    <!--CSS-->
+    <style>
+      html, body, #map {
+        height: 100%;
+        width: 100%;
+        padding: 0px;
+      }
+    </style>
+
+  </head>
+    <body>
+      <div id="map">
+      </div>
+    </body>
+  </html>
