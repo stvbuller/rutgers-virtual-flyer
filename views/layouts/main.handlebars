@@ -16,12 +16,46 @@
         </ul>
       </div>
     </div>
-
-
   </nav>
+
   <main>
-    <div class="container">
-      {{{ body }}}
+  <!--PAGE LAYOUT-->
+    <div class="row">
+    <!--CHECKBOX FILTER-->
+      <div class="col s12 m3 l3" id="test">
+        <div id="filter">
+          <form action="#">
+          <!--DINING-->
+            <p>
+              <input type="checkbox" id="dining" />
+              <label for="dining">Dining</label>
+            </p>
+            <!--RU SPORTS-->
+            <p>
+              <input type="checkbox" id="ru_sports" checked="checked" />
+              <label for="ru_sports">RU Sports</label>
+            </p>
+            <!--ON-CAMPUS EVENTS-->
+            <p>
+              <input type="checkbox" id="campus_events" />
+              <label for="campus_events">On-Campus Events</label>
+            </p>
+            <!--RECREATION-->
+            <p>
+              <input type="checkbox" id="recreation" />
+              <label for="recreation">Things-to-do</label>
+            </p>
+          </form>
+        </div>
+      </div>
+
+      <div class="col s12 m6 l6" id="test">
+        {{{ body }}} <!--GEOLOCATION / PLACE-->
+      </div>
+
+      <div class="col s12 m3 l3" id="test">
+        <!--NEXTBUS / SUGABUS API?-->
+      </div>
     </div>
    </main>
 
