@@ -10,6 +10,8 @@
     <!--PUT THIS IS JS FILE-->
     <script>
       var map;
+      var infowindow;
+
       function initialize() {
         //CENTER THE MAP
         var center = new google.maps.LatLng(40.5008227,-74.4495878); //lat,long @ Rutgers U
@@ -24,6 +26,8 @@
           radius: 8000, //search radius from center (in meters)
           types: ['restaurant'] //add many types into the array?
         };
+        //OPEN INFO WINDOW ON MAP
+        infowindow = new google.maps.InfoWindow();
         //CREATE NEW GOOGLE MAPS OBJ
         var service = new google.maps.places.PlacesService(map);
         //USE OBJ METHOD -- NEARBYSEARCH
@@ -37,12 +41,17 @@
           }
         }
       }
-
+      //CREATE THE MARKER
       function createMarker(place) {
         var placeLoc = place.geometry.location;
         var marker = new google.maps.Marker({
           map: map,
           position: place.geometry.location
+        });
+        //ON MARKER 'CLICK' SHOW INFO
+        google.maps.event.addListener(marker, 'click', function(){
+          infowindow.setContent(place.name);
+          infowindow.open(map, this);
         });
       }
 
