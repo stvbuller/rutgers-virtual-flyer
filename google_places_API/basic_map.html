@@ -24,7 +24,7 @@
         var request = {
           location: center,
           radius: 8000, //search radius from center (in meters)
-          types: ['restaurant'] //add many types into the array?
+          types: ['restaurant','bar','cafe','university','food'] //add many types into the array?
         };
         //OPEN INFO WINDOW ON MAP
         infowindow = new google.maps.InfoWindow();
@@ -59,7 +59,7 @@
     </script>
 
 
-    <!--CSS-->
+    <!--CSS STYLE-->
     <style>
       html, body, #map {
         height: 100%;
@@ -69,8 +69,10 @@
     </style>
 
   </head>
+
     <body>
       <div id="map">
       </div>
     </body>
+
   </html>
