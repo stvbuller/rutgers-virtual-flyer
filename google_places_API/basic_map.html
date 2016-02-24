@@ -36,7 +36,7 @@
         //USE OBJ METHOD -- NEARBYSEARCH
         service.nearbySearch(request, callback);
 
-        // Try HTML5 geolocation.
+        // TRY TO WIRE UP HTML5 GEOLOCATION.
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(function(position) {
             var pos = {
@@ -51,7 +51,7 @@
             handleLocationError(true, infowindow, map.getCenter());
           });
         } else {
-          // Browser doesn't support Geolocation
+          // BROWSER DOESNT SUPPORT GEOLOCATION
           handleLocationError(false, infowindow, map.getCenter());
         }
       } //END OF INIT FUNCTION
@@ -71,6 +71,7 @@
           }
         }
       }
+
       //CREATE THE MARKER
       function createMarker(place) {
         var placeLoc = place.geometry.location;
@@ -84,7 +85,7 @@
           infowindow.open(map, this);
         });
       }
-
+      //ON LOAD INITIALIZE MAP
       google.maps.event.addDomListener(window, 'load', initialize);
     </script>
 
@@ -98,6 +99,7 @@
       }
     </style>
 
+  <!--HTML-->
   </head>
 
     <body>
