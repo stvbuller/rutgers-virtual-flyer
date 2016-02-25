@@ -12,3 +12,6 @@ Git, Trello
 
 #APIs:
 Google Maps / Places
+
+#Plugins
+jQuery Validation Plugin
