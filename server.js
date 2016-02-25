@@ -4,8 +4,11 @@ var app = express();
 var PORT = process.env.PORT || 3000;
 
 // database setup
+var mysql = require('mysql')
 var Sequelize = require('sequelize');
-var connection = new Sequelize('rutgers_flyer_db', 'root');
+
+var connection = new Sequelize(process.env.JAWSDB_URL);
+
 
 //requiring passport last
 var passport = require('passport');
