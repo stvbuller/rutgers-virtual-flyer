@@ -3,6 +3,8 @@ var express = require('express');
 var app = express();
 var PORT = process.env.PORT || 3000;
 
+require('dotenv').config();
+
 // database setup
 var mysql = require('mysql')
 var Sequelize = require('sequelize');
