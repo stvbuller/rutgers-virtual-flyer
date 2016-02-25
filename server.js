@@ -7,6 +7,7 @@ var PORT = process.env.PORT || 3000;
 var mysql = require('mysql')
 var Sequelize = require('sequelize');
 
+console.log(process.env.JAWSDB_URL);
 var connection = new Sequelize(process.env.JAWSDB_URL);
 
 
