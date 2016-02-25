@@ -6,8 +6,9 @@
     <!--GOOGLE MAPS API SCRIPT-->
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyB94SDmdMuZ9uzP9NHmdvNglws1C-tFhHA"></script>
     <title>Rutgers Open House : Google Maps API</title>
+  </head>
 
-    <!--PUT THIS IS JS FILE-->
+<!--********************START OF JAVASCRIPT********************-->
     <script>
       var map;
       var infowindow;
@@ -19,23 +20,18 @@
           center: center,
           zoom: 14 //the level of zoom 1 is whole globe (higher number = more zoom)
         });
-
         //OPEN INFO WINDOW ON MAP
         infowindow = new google.maps.InfoWindow();
-
         //SEARCH INFO
         var request = {
           location: center,
           radius: 8000, //search radius from center (in meters)
           types: ['restaurant','bar','cafe','university','food'] //add many types into the array?
         };
-
         //CREATE NEW GOOGLE MAPS OBJ
         var service = new google.maps.places.PlacesService(map);
-
         //USE OBJ METHOD -- NEARBYSEARCH
         service.nearbySearch(request, callback);
-
         // TRY TO WIRE UP HTML5 GEOLOCATION.
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(function(position) {
@@ -62,7 +58,6 @@
                             'Error: The Geolocation service failed.' :
                             'Error: Your browser doesn\'t support geolocation.');
       }
-
       //CHECK RESULTS AND ADD MARKER FOR EACH LOCALE
       function callback(results, status) {
         if(status === google.maps.places.PlacesServiceStatus.OK) {
@@ -71,7 +66,6 @@
           }
         }
       }
-
       //CREATE THE MARKER
       function createMarker(place) {
         var placeLoc = place.geometry.location;
@@ -90,7 +84,8 @@
     </script>
 
 
-    <!--CSS STYLE-->
+
+<!--********************START OF MAP CSS STYLING********************-->
     <style>
       html, body, #map {
         height: 100%;
@@ -99,9 +94,7 @@
       }
     </style>
 
-  <!--HTML-->
-  </head>
-
+<!--********************HTML CONTINUED FROM ABOVE********************-->
     <body>
       <div id="map">
       </div>
