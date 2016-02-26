@@ -9,8 +9,13 @@ require('dotenv').config();
 var mysql = require('mysql')
 var Sequelize = require('sequelize');
 
-console.log(process.env.JAWSDB_URL);
-var connection = new Sequelize(process.env.JAWSDB_URL);
+
+// This connection is for heroku app and must be commented back in before deploying to heroku
+// console.log(process.env.JAWSDB_URL);
+// var connection = new Sequelize(process.env.JAWSDB_URL);
+
+// This connection is to test locally and must be commented out before deploying to heroku
+var connection = new Sequelize('rutgers_flyer_db', 'root');
 
 //requiring passport last
 var passport = require('passport');
@@ -29,26 +34,28 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //passport use methed as callback when being authenticated
-passport.use(new passportLocal.Strategy(function(username, password, done) {
+passport.use(new passportLocal.Strategy(function(email, password, done) {
   //check password in db
   User.findOne({
-      where: {
-          username: username
-      }
+    where: {
+      email: email
+    }
   }).then(function(user) {
-      //check password against hash
-      if(user){
-          bcrypt.compare(password, user.dataValues.password, function(err, user) {
-              if (user) {
-                //if password is correct authenticate the user with cookie
-                done(null, { id: username, username: username });
-              } else{
-                done(null, null);
-              }
-          });
-      } else {
+    //check password against hash
+    if(user) {
+      bcrypt.compare(password, user.dataValues.password, function(err, user) {
+        if (user) {
+          //if password is correct authenticate the user with cookie
+          done(null, { id: email, email: email });
+        }
+        else {
           done(null, null);
-      }
+        }
+      });
+    }
+    else {
+      done(null, null);
+    }
   });
 }));
 
@@ -57,7 +64,7 @@ passport.serializeUser(function(user, done) {
     done(null, user.id);
 });
 passport.deserializeUser(function(id, done) {
-    done(null, { id: id, username: id })
+    done(null, { id: id, email: id })
 });
 
 var bcrypt = require('bcryptjs');
@@ -101,7 +108,7 @@ var User = connection.define('user', {
 //handlebars setup
 var expressHandlebars = require('express-handlebars');
 app.engine('handlebars', expressHandlebars({
-    defaultLayout: 'main'
+  defaultLayout: 'main'
 }));
 app.set('view engine', 'handlebars');
 
@@ -126,7 +133,6 @@ app.get("/login", function(req, res){
 app.get('/home', function(req, res){
   res.render('home', {
     user: req.user,
-    student: req.student,
     isAuthenticated: req.isAuthenticated()
   });
 });
