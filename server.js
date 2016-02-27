@@ -25,7 +25,7 @@ var passportLocal = require('passport-local');
 //middleware init
 app.use("/js", express.static("public/js"));
 app.use("/css", express.static("public/css"));
-app.use("/img", express.static("public/img"));
+app.use("/images", express.static("public/images"));
 app.use(require('express-session')({
     secret: 'crackalackin',
     resave: true,
