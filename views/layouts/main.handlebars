@@ -12,6 +12,7 @@
         <a href="/" class="brand-logo">RU Review</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
           <li><a class="waves-effect waves-light btn modal-trigger white" href="#login-modal"><span class="red-text accent-4">Login</span></a></li>
+          <li><a class="waves-effect waves-light btn modal-trigger white" href="#signup-modal"><span class="red-text accent-4">Signup</span></a></li>
           <li><a href="/signup">Signup</a></li>
         </ul>
       </div>
@@ -57,14 +58,13 @@
 
       </div>
     </div>
-     
   </main>
 
    <aside>
      <div id="login-modal" class="modal">
       <form id="formLogin" class="col s12" method="POST" action="/check">
         <div class="modal-content">
-          <h3>Login Page</h3>
+          <h3>Log In</h3>
           <div class="row">
             <div class="input-field col s12">
               <input id="email" type="email" class="validate" name="username">
@@ -77,6 +77,43 @@
               <label for="password">Password</label>
             </div>
           </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn modal-action modal-close waves-effect waves-white btn-flat">Cancel</button>
+          <button type="submit" class="btn modal-action modal-close waves-effect waves-white btn-flat">Submit</button>
+        </div>
+      </form>
+    </div>
+   </aside>
+
+   <aside>
+     <div id="signup-modal" class="modal">
+      <form class="col s12" id="formSignup" method="POST" action="/save">
+        <div class="modal-content">
+          <h3>Sign Up</h3>
+          <div class="row">
+            <div class="input-field col s6">
+              <input id="first_name" type="text" class="validate" name="firstname">
+              <label for="first_name">First Name</label>
+            </div>
+            <div class="input-field col s6">
+              <input id="last_name" type="text" class="validate" name="lastname">
+              <label for="last_name">Last Name</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="email" type="email" class="validate" name="username">
+              <label for="email">Email</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="password" type="password" class="validate" name="password">
+              <label for="password">Password</label>
+            </div>
+          </div>
+        </div>
         <div class="modal-footer">
           <button class="btn modal-action modal-close waves-effect waves-white btn-flat">Cancel</button>
           <button type="submit" class="btn modal-action modal-close waves-effect waves-white btn-flat">Submit</button>
