@@ -9,11 +9,20 @@ require('dotenv').config();
 var mysql = require('mysql')
 var Sequelize = require('sequelize');
 
+// This connection is for heroku app and must be commented back in before deploying to heroku
+//with heroku use this:
+//console.log(process.env.JAWSDB_URL);
+//var connection = new Sequelize(process.env.JAWSDB_URL);
+
+//local test:
+//This connection is to test locally and must be commented out before deploying to heroku
+var connection = new Sequelize('rutgers_flyer_db', 'root');
+
 if(process.env.NODE_ENV === 'production') {
   // HEROKU DB
   console.log(process.env.JAWSDB_URL);
   var connection = new Sequelize(process.env.JAWSDB_URL);
-} 
+}
 else {
   // LOCAL DB
   var connection = new Sequelize('rutgers_flyer_db', 'root');
