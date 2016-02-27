@@ -30,8 +30,6 @@ app.use(require('express-session')({
     saveUninitialized: true,
     cookie : { secure : false, maxAge : (4 * 60 * 60 * 1000) }, // 4 hours
 }));
-app.use(passport.initialize());
-app.use(passport.session());
 
 //passport use methed as callback when being authenticated
 passport.use(new passportLocal.Strategy(function(email, password, done) {
@@ -58,6 +56,9 @@ passport.use(new passportLocal.Strategy(function(email, password, done) {
     }
   });
 }));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 //change the object used to authenticate to a smaller token, and protects the server from attacks
 passport.serializeUser(function(user, done) {
@@ -132,7 +133,7 @@ app.get("/login", function(req, res){
 
 app.get('/home', function(req, res){
   res.render('home', {
-    user: req.user,
+    email: req.email,
     isAuthenticated: req.isAuthenticated()
   });
 });
