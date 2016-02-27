@@ -2,6 +2,8 @@
 
 $(document).ready(function() {
 
+  // Triggers modal launch
+  $('.modal-trigger').leanModal();
 });
 
 
