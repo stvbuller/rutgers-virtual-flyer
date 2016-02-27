@@ -158,6 +158,10 @@ app.get('/saveRating', function(req, res) {
   res.render('home');
 })
 
+app.post('/saveRating', function(req, res) {
+  res.render('home');
+})
+
 app.post("/save", function(req, res){
   User.create(req.body).then(function(result){
     res.redirect('/?msg=Account created. You may log in.');
