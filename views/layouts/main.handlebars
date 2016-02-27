@@ -12,7 +12,7 @@
       <div class="container">
         <a href="/" class="brand-logo">RU Review</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
-          <li><a href="/login">Login</a></li>
+          <li><a class="waves-effect waves-light btn modal-trigger white" href="#login-modal"><span class="red-text accent-4">Login</span></a></li>
           <li><a href="/signup">Signup</a></li>
         </ul>
       </div>
@@ -58,13 +58,40 @@
 
       </div>
     </div>
+     
   </main>
+
+   <aside>
+     <div id="login-modal" class="modal">
+      <form id="formLogin" class="col s12" method="POST" action="/check">
+        <div class="modal-content">
+          <h3>Login Page</h3>
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="email" type="email" class="validate" name="username">
+              <label for="email">Email</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="password" type="password" class="validate" name="password">
+              <label for="password">Password</label>
+            </div>
+          </div>
+        <div class="modal-footer">
+          <button class="btn modal-action modal-close waves-effect waves-white btn-flat">Cancel</button>
+          <button type="submit" class="btn modal-action modal-close waves-effect waves-white btn-flat">Submit</button>
+        </div>
+      </form>
+    </div>
+   </aside>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
   <script type="text/javascript" src="js/scripts.js"></script>
   <!-- plugin for jQuery form validation -->
   <script src="https://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.min.js"></script>
+  <script src='https://api.mapbox.com/mapbox.js/v2.3.0/mapbox.js'></script>
   <!-- js file for form validation -->
   <script type="text/javascript" src="js/formValidate.js"></script>
   <script src='https://api.mapbox.com/mapbox.js/v2.3.0/mapbox.js'></script>
