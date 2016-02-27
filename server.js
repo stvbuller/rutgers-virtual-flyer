@@ -21,9 +21,9 @@ var connection = new Sequelize('rutgers_flyer_db', 'root');
 var passport = require('passport');
 var passportLocal = require('passport-local');
 //middleware init
-app.use("/js", express.static("public/js"));
-app.use("/css", express.static("public/css"));
-app.use("/img", express.static("public/img"));
+// app.use("/js", express.static("public/js"));
+// app.use("/css", express.static("public/css"));
+// app.use("/img", express.static("public/img"));
 app.use(require('express-session')({
     secret: 'crackalackin',
     resave: true,
@@ -34,11 +34,13 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //passport use methed as callback when being authenticated
-passport.use(new passportLocal.Strategy(function(email, password, done) {
+passport.use(new passportLocal.Strategy(function(username, password, done) {
   //check password in db
+  console.log(username);
+  console.log(password);
   User.findOne({
     where: {
-      email: email
+      username: username
     }
   }).then(function(user) {
     //check password against hash
@@ -46,7 +48,7 @@ passport.use(new passportLocal.Strategy(function(email, password, done) {
       bcrypt.compare(password, user.dataValues.password, function(err, user) {
         if (user) {
           //if password is correct authenticate the user with cookie
-          done(null, { id: email, email: email });
+          done(null, { id: username, username: username });
         }
         else {
           done(null, null);
@@ -64,7 +66,7 @@ passport.serializeUser(function(user, done) {
     done(null, user.id);
 });
 passport.deserializeUser(function(id, done) {
-    done(null, { id: id, email: id })
+    done(null, { id: id, username: id })
 });
 
 var bcrypt = require('bcryptjs');
@@ -82,7 +84,7 @@ var User = connection.define('user', {
     type: Sequelize.STRING,
     allowNull: false
   },
-  email: {
+  username: {
     type: Sequelize.STRING,
     allowNull: false,
     unique: true
@@ -131,8 +133,9 @@ app.get("/login", function(req, res){
 });
 
 app.get('/home', function(req, res){
+  console.log(res);
   res.render('home', {
-    email: req.email,
+    user: req.user,
     isAuthenticated: req.isAuthenticated()
   });
 });
