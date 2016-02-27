@@ -7,9 +7,6 @@ $(document).ready(function() {
   //materialize parallax
   $('.parallax').parallax();
 
-  //materialize parallax
-  $('.parallax').parallax();
-
   //Mapbox map
   L.mapbox.accessToken = 'pk.eyJ1IjoiamFtZXNvbmNvZGVzIiwiYSI6ImNpbDJocmJveDNiemd1YWtzdHNwb21lbWsifQ.YptzfDfyzVlF0zNr4NhUhQ';
   var map = L.mapbox.map('map', 'mapbox.light')
@@ -62,10 +59,4 @@ $(document).ready(function() {
       }
   });
 
-
-
-
 }); //end of doc.ready
-
-
-
