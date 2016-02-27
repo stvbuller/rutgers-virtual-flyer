@@ -19,7 +19,7 @@
 
 <script>
 L.mapbox.accessToken = 'pk.eyJ1IjoiamFtZXNvbmNvZGVzIiwiYSI6ImNpbDJocmJveDNiemd1YWtzdHNwb21lbWsifQ.YptzfDfyzVlF0zNr4NhUhQ';
-var map = L.mapbox.map('map', 'mapbox.emerald')
+var map = L.mapbox.map('map', 'mapbox.light')
     .setView([40.5008227, -74.4495878], 13); //40.5008227,-74.4495878
 
 // Credit Foursquare : required by documentation
@@ -34,7 +34,7 @@ var CLIENT_SECRET = '4GZZXEFSW50ZA0UKM2CJFMA5PSTLGVHW5NLZPEUEA2JG4ZRZ';
 
 // https://developer.foursquare.com/start/search
 var API_ENDPOINT = 'https://api.foursquare.com/v2/venues/search' +
-  '?categoryId= ? ' + //create variable of categories and add here
+  '?query=restaurant' + //create variable of categories and add here
   '&client_id=CLIENT_ID' +
   '&client_secret=CLIENT_SECRET' +
   '&v=20140806' + //foursquare version year/month/day
