@@ -11,11 +11,11 @@ var Sequelize = require('sequelize');
 
 
 // This connection is for heroku app and must be commented back in before deploying to heroku
-console.log(process.env.JAWSDB_URL);
-var connection = new Sequelize(process.env.JAWSDB_URL);
+// console.log(process.env.JAWSDB_URL);
+// var connection = new Sequelize(process.env.JAWSDB_URL);
 
 // This connection is to test locally and must be commented out before deploying to heroku
-// var connection = new Sequelize('rutgers_flyer_db', 'root');
+var connection = new Sequelize('rutgers_flyer_db', 'root');
 
 //requiring passport last
 var passport = require('passport');
@@ -119,6 +119,9 @@ app.post('/check', passport.authenticate('local', {
   successRedirect: '/home',
   failureRedirect: '/?msg=Login Credentials do not work'
 }));
+// app.post('/check', function(req, res) {
+//   res.send("YOU ARE HERE");
+// });
 
 app.get("/", function(req, res){
   res.render('home', {msg: req.query.msg});
