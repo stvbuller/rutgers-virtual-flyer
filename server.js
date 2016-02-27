@@ -9,8 +9,13 @@ require('dotenv').config();
 var mysql = require('mysql')
 var Sequelize = require('sequelize');
 
-console.log(process.env.JAWSDB_URL);
-var connection = new Sequelize(process.env.JAWSDB_URL);
+
+// This connection is for heroku app and must be commented back in before deploying to heroku
+// console.log(process.env.JAWSDB_URL);
+// var connection = new Sequelize(process.env.JAWSDB_URL);
+
+// This connection is to test locally and must be commented out before deploying to heroku
+var connection = new Sequelize('rutgers_flyer_db', 'root');
 
 //requiring passport last
 var passport = require('passport');
@@ -31,24 +36,28 @@ app.use(passport.session());
 //passport use methed as callback when being authenticated
 passport.use(new passportLocal.Strategy(function(username, password, done) {
   //check password in db
+  console.log(username);
+  console.log(password);
   User.findOne({
-      where: {
-          username: username
-      }
+    where: {
+      username: username
+    }
   }).then(function(user) {
-      //check password against hash
-      if(user){
-          bcrypt.compare(password, user.dataValues.password, function(err, user) {
-              if (user) {
-                //if password is correct authenticate the user with cookie
-                done(null, { id: username, username: username });
-              } else{
-                done(null, null);
-              }
-          });
-      } else {
+    //check password against hash
+    if(user) {
+      bcrypt.compare(password, user.dataValues.password, function(err, user) {
+        if (user) {
+          //if password is correct authenticate the user with cookie
+          done(null, { id: username, username: username });
+        }
+        else {
           done(null, null);
-      }
+        }
+      });
+    }
+    else {
+      done(null, null);
+    }
   });
 }));
 
@@ -75,7 +84,7 @@ var User = connection.define('user', {
     type: Sequelize.STRING,
     allowNull: false
   },
-  email: {
+  username: {
     type: Sequelize.STRING,
     allowNull: false,
     unique: true
@@ -101,7 +110,7 @@ var User = connection.define('user', {
 //handlebars setup
 var expressHandlebars = require('express-handlebars');
 app.engine('handlebars', expressHandlebars({
-    defaultLayout: 'main'
+  defaultLayout: 'main'
 }));
 app.set('view engine', 'handlebars');
 
@@ -124,9 +133,9 @@ app.get("/login", function(req, res){
 });
 
 app.get('/home', function(req, res){
+  console.log(res);
   res.render('home', {
     user: req.user,
-    student: req.student,
     isAuthenticated: req.isAuthenticated()
   });
 });
