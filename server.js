@@ -11,11 +11,13 @@ var Sequelize = require('sequelize');
 
 
 // This connection is for heroku app and must be commented back in before deploying to heroku
-console.log(process.env.JAWSDB_URL);
-var connection = new Sequelize(process.env.JAWSDB_URL);
+//with heroku use this:
+//console.log(process.env.JAWSDB_URL);
+//var connection = new Sequelize(process.env.JAWSDB_URL);
 
-// This connection is to test locally and must be commented out before deploying to heroku
-// var connection = new Sequelize('rutgers_flyer_db', 'root');
+//local test:
+//This connection is to test locally and must be commented out before deploying to heroku
+var connection = new Sequelize('rutgers_flyer_db', 'root');
 
 //requiring passport last
 var passport = require('passport');
@@ -23,7 +25,7 @@ var passportLocal = require('passport-local');
 //middleware init
 app.use("/js", express.static("public/js"));
 app.use("/css", express.static("public/css"));
-app.use("/img", express.static("public/img"));
+app.use("/images", express.static("public/images"));
 app.use(require('express-session')({
     secret: 'crackalackin',
     resave: true,
