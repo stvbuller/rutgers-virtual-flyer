@@ -152,6 +152,6 @@ app.post("/save", function(req, res){
 // database connection via sequelize
 connection.sync().then(function() {
   app.listen(PORT, function() {
-      console.log("Listening on:" + PORT)
+    console.log("Listening on:" + PORT)
   });
 });
