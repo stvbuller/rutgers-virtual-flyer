@@ -19,47 +19,51 @@
   </nav>
 
   <main>
-  <!--PAGE LAYOUT-->
-    <div class="row">
-      <!--CHECKBOX FILTER-->
-      <div class="col s12 m3 l3" id="test">
-        <div id="filter">
-          <form action="#">
-          <!--DINING-->
-            <p>
-              <input type="checkbox" id="dining" checked="checked"  />
-              <label for="dining">Dining</label>
-            </p>
-            <!--RU SPORTS-->
-            <p>
-              <input type="checkbox" id="ru_sports" />
-              <label for="ru_sports">RU Sports</label>
-            </p>
-            <!--ON-CAMPUS EVENTS-->
-            <p>
-              <input type="checkbox" id="campus_events" />
-              <label for="campus_events">On-Campus Events</label>
-            </p>
-            <!--RECREATION-->
-            <p>
-              <input type="checkbox" id="recreation" />
-              <label for="recreation">Things-to-do</label>
-            </p>
-          </form>
+    <div class="parallax-container">
+      <div class="parallax"><img src="images/collegeAve.jpg"></div>
+    </div>
+
+    <div class="section white">
+      <div class="row container">
+         <div class="col s12 m3 l3" id="test">
+          <div id="filter">
+            <form action="#">
+            <!--DINING-->
+              <p>
+                <input type="checkbox" id="dining" checked="checked"  />
+                <label for="dining">Dining</label>
+              </p>
+              <!--RU SPORTS-->
+              <p>
+                <input type="checkbox" id="ru_sports" />
+                <label for="ru_sports">RU Sports</label>
+              </p>
+              <!--ON-CAMPUS EVENTS-->
+              <p>
+                <input type="checkbox" id="campus_events" />
+                <label for="campus_events">On-Campus Events</label>
+              </p>
+              <!--RECREATION-->
+              <p>
+                <input type="checkbox" id="recreation" />
+                <label for="recreation">Things-to-do</label>
+              </p>
+            </form>
+          </div>
         </div>
-      </div>
 
-      <div class="col s12 m6 l6" id="test">
-        {{{ body }}} <!--GOOGLE PLACES API / LOGIN INFORMATION-->
-      </div>
+        <div class="col s12 m6 l6" id="test">
+          {{{ body }}} <!--GOOGLE PLACES API / LOGIN INFORMATION-->
+        </div>
 
-      <div class="col s12 m3 l3" id="test">
-        <div id= " ">
-          <!--NEXTBUS / SUGABUS API?-->
+        <div class="col s12 m3 l3" id="test">
+          <div id= " ">
+            <!--NEXTBUS / SUGABUS API?-->
+          </div>
         </div>
       </div>
     </div>
-   </main>
+  </main>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
