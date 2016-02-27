@@ -10,11 +10,12 @@ var mysql = require('mysql')
 var Sequelize = require('sequelize');
 
 if(process.env.NODE_ENV === 'production') {
-  // HEROKU
+  // HEROKU DB
   console.log(process.env.JAWSDB_URL);
   var connection = new Sequelize(process.env.JAWSDB_URL);
-} else {
-  // LOCAL
+} 
+else {
+  // LOCAL DB
   var connection = new Sequelize('rutgers_flyer_db', 'root');
 }
 
