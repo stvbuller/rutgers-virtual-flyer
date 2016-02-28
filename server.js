@@ -154,10 +154,6 @@ app.get('/home', function(req, res){
   });
 });
 
-app.get('/saveRating', function(req, res) {
-  res.render('home');
-})
-
 app.post('/saveRating', function(req, res) {
   res.render('home');
 })
