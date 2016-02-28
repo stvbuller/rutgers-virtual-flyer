@@ -179,15 +179,19 @@ app.get("/", function(req, res){
   res.render('home', {msg: req.query.msg});
 });
 
-app.get("/signup", function(req, res){
-  res.render('signup');
+// app.get("/signup", function(req, res){
+//   res.render('signup');
+// });
+
+// app.get("/login", function(req, res){
+//   res.render('login');
+// });
+
+app.get("/reviews", function(req, res) {
+  res.render('reviews');
 });
 
-app.get("/login", function(req, res){
-  res.render('login');
-});
-
-app.get('/home', function(req, res){
+app.get("/home", function(req, res) {
   console.log(res);
   res.render('home', {
     user: req.user,
@@ -195,17 +199,18 @@ app.get('/home', function(req, res){
   });
 });
 
-app.get('/saveRating', function(req, res) {
-  res.render('home');
-})
-
-app.post('/saveRating', function(req, res) {
-  res.render('home');
-})
-
-app.post("/save", function(req, res){
-  User.create(req.body).then(function(result){
+app.post("/save", function(req, res) {
+  User.create(req.body).then(function(result) {
     res.redirect('/?msg=Account created. You may log in.');
+  }).catch(function(err) {
+    console.log(err);
+    res.redirect('/?msg=' + err.message);
+  });
+});
+
+app.post("/saveRating", function(req, res) {
+  Review.create(req.body).then(function(result) {
+    res.redirect('/?msg=Review saved.');
   }).catch(function(err) {
     console.log(err);
     res.redirect('/?msg=' + err.message);
