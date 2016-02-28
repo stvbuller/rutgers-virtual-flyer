@@ -3,8 +3,10 @@
 <head>
   <title></title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
-  <link rel="stylesheet" type="text/css" href="css/styles.css">
   <link href='https://api.mapbox.com/mapbox.js/v2.3.0/mapbox.css' rel='stylesheet' />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
 <body>
   <nav>
@@ -20,13 +22,17 @@
   </nav>
 
   <main>
-    <div class="parallax-container">
+    <div class="parallax-container center-align">
+      <h1 class="text-shadow" data-wow-delay="2.5s"><span class="white-text">RU Review</span></h1>
+        <h4 class="text-shadow" data-wow-delay="3.5s"><span class="white-text">Read and Write Reviews of Your Favorite Rutgers Spots</i></h4>
+        <button class="waves-effect waves-light btn modal-trigger white" href="#rate-modal"><i class="fa fa-star red-text accent-4"></i> <span class="red-text accent-4">Rate and Review</span></button>
+        <button class="waves-effect waves-light btn modal-trigger white" href="#read-modal"><i class="fa fa-file-text red-text accent-4"></i> <span class="red-text accent-4">Read Reviews</span></button>
       <div class="parallax"><img src="/images/collegeAve.jpg"></div>
     </div>
 
     <div class="section white">
       <div class="row container">
-         <div class="col s12 m6" id="test">
+         <div class="col s3 m3" id="test">
           <div id="filter">
             <form action="#">
             <!--DINING-->
@@ -52,10 +58,11 @@
             </form>
           </div>
         </div>
-        <div class="parallax-container">
-         <div id='map'></div>
+        <div class="col s9 m9">
+          <div class="parallax-container">
+            <div id='map'></div>
+          </div>
         </div>
-
       </div>
     </div>
   </main>
@@ -111,6 +118,48 @@
             <div class="input-field col s12">
               <input id="password" type="password" class="validate" name="password">
               <label for="password">Password</label>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn modal-action modal-close waves-effect waves-white btn-flat">Cancel</button>
+          <button type="submit" class="btn modal-action modal-close waves-effect waves-white btn-flat">Submit</button>
+        </div>
+      </form>
+    </div>
+   </aside>
+
+   <aside>
+     <div id="rate-modal" class="modal">
+      <form class="col s12" id="formSignup" method="POST" action="/saveRating">
+        <div class="modal-content">
+          <h3>Review</h3>
+          <div class="row">
+            <div class="input-field col s6">
+              <input id="location-name" type="text" class="validate" name="location-name">
+              <label for="location-name">Location Name</label>
+            </div>
+            <div class="input-field col s6">
+              <input id="event-type" type="text" class="validate" name="event-type">
+              <label for="event-type">Event Type</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="city" type="text" name="city">
+              <label for="city">City</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="rating" type="text" class="validate" name="rating">
+              <label for="rating">Star Rating</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="review" type="text" class="validate" name="review">
+              <label for="review">Review</label>
             </div>
           </div>
         </div>
