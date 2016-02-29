@@ -43,5 +43,5 @@ $(document).ready(function() {
           map.setView([data.latlng[0], data.latlng[1]], 13);
       }
     }
-  });
+  }); //end of doc.ready
 
