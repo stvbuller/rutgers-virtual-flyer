@@ -203,7 +203,10 @@ app.post('/check', passport.authenticate('local', {
 // });
 
 app.get("/", function(req, res){
-  res.render('home', {msg: req.query.msg});
+  res.render('home', {msg: req.query.msg,
+    user: req.user,
+    isAuthenticated: req.isAuthenticated()
+  });
 });
 
 // app.get("/signup", function(req, res){
@@ -215,7 +218,10 @@ app.get("/", function(req, res){
 // });
 
 app.get("/reviews", function(req, res) {
-  res.render('reviews');
+  res.render('reviews', {msg: req.query.msg,
+    user: req.user,
+    isAuthenticated: req.isAuthenticated()
+  });
 });
 
 app.get("/home", function(req, res) {
