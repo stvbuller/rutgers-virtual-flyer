@@ -161,7 +161,7 @@ var Review = connection.define('review', {
   locationName: {
     type: Sequelize.STRING
   },
-  eventType: {
+  diningType: {
     type: Sequelize.STRING,
     alllowNull: false
   },
