@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <!--GOOGLE MAPS API SCRIPT-->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyB94SDmdMuZ9uzP9NHmdvNglws1C-tFhHA"></script>
+    <title>Rutgers Open House : Google Maps API</title>
+  </head>
+
+  <script>
+    function getRestaurants(callback){
+      $.getJSON('some connection to data/datbase');
+    }
+
+    function initialize() {
+      //CENTER THE MAP
+      var center = new google.maps.LatLng(40.5008227,-74.4495878); //lat,long @ Rutgers U
+      var map = new google.maps.Map(document.getElementById('map'), {
+        center: center,
+        zoom: 14 //the level of zoom 1 is whole globe (higher number = more zoom)
+      });
+
+      getRestaurants(function(data){
+        var restaurants = data.restaurants;
+        var restuarant;
+        var latLng;
+
+        for(var prop in restuarants){
+          restaurant = restaurants[i];
+          latLng = new google.maps.LatLng(restaurant.latitude, restaurant.longitute);
+
+          var marker = new google.maps.Marker({
+            position: latLng,
+            map: map,
+            title: restaurant.name
+          });
+        }
+      })
+    }
+    //ON LOAD INITIALIZE MAP
+    google.maps.event.addDomListener(window, 'load', initialize);
+  </script>
+
+  <style>
+    html, body, #map {
+      height: 100%;
+      width: 100%;
+      padding: 0px;
+    }
+  </style>
+
+<!--********************HTML CONTINUED FROM ABOVE********************-->
+  <body>
+    <div id="map"></div>
+  </body>
+</html>
