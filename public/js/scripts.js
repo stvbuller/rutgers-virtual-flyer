@@ -59,4 +59,4 @@ $(document).ready(function() {
       }
   });
 
-}); //end of doc.ready
+  }); //end of doc.ready

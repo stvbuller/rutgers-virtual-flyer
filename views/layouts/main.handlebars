@@ -14,9 +14,11 @@
       <div class="container">
         <a href="/" class="brand-logo">RU Review</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
-          <li><span class="white-text accent-4">{{#if isAuthenticated}} Hello {{{ user.username }}} {{/if}}</span></li>
+          <li><span class="white-text accent-4">{{#if isAuthenticated}} Hello {{ user.username }} {{/if}}</span></li>
+          {{#if isAuthenticated }} {{ else }}
           <li><a class="waves-effect waves-light btn modal-trigger white" href="#login-modal"><span class="red-text accent-4">Login</span></a></li>
           <li><a class="waves-effect waves-light btn modal-trigger white" href="#signup-modal"><span class="red-text accent-4">Signup</span></a></li>
+          {{/if}}
         </ul>
       </div>
     </div>
