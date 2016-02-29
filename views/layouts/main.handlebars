@@ -14,6 +14,7 @@
       <div class="container">
         <a href="/" class="brand-logo">RU Review</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><span class="white-text accent-4">{{#if isAuthenticated}} Hello {{{ user.username}}} {{/if}}</span></li>
           <li><a class="waves-effect waves-light btn modal-trigger white" href="#login-modal"><span class="red-text accent-4">Login</span></a></li>
           <li><a class="waves-effect waves-light btn modal-trigger white" href="#signup-modal"><span class="red-text accent-4">Signup</span></a></li>
         </ul>
@@ -93,11 +94,11 @@
           <h3>Review</h3>
           <div class="row">
             <div class="input-field col s6">
-              <input id="location-name" type="text" class="validate" name="location-name">
+              <input id="location-name" type="text" class="validate" name="locationName">
               <label for="location-name">Location Name</label>
             </div>
             <div class="input-field col s6">
-              <input id="event-type" type="text" class="validate" name="event-type">
+              <input id="event-type" type="text" class="validate" name="eventType">
               <label for="event-type">Event Type</label>
             </div>
           </div>
