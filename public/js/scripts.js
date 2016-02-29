@@ -7,56 +7,41 @@ $(document).ready(function() {
   //materialize parallax
   $('.parallax').parallax();
 
-  //Mapbox map
-  L.mapbox.accessToken = 'pk.eyJ1IjoiamFtZXNvbmNvZGVzIiwiYSI6ImNpbDJocmJveDNiemd1YWtzdHNwb21lbWsifQ.YptzfDfyzVlF0zNr4NhUhQ';
-  var map = L.mapbox.map('map', 'mapbox.light')
-      .setView([40.5008227, -74.4495878], 13); //40.5008227,-74.4495878
+   //blank map
+    //button to find your current location
+    //create marker (address to long-lat)
+    //insert marker on review submit -- review attached to marker
 
-  // Credit Foursquare : required by documentation
-  map.attributionControl
-      .addAttribution('<a href="https://foursquare.com/">Places data from Foursquare</a>');
+    //mapbox key
+    L.mapbox.accessToken = 'pk.eyJ1IjoiamFtZXNvbmNvZGVzIiwiYSI6ImNpbDJocmJveDNiemd1YWtzdHNwb21lbWsifQ.YptzfDfyzVlF0zNr4NhUhQ';
 
-  // Create a Foursquare developer account: https://developer.foursquare.com/
-  // NOTE: CHANGE THESE VALUES TO YOUR OWN:
-  // Otherwise they can be cycled or deactivated with zero notice.
-  var CLIENT_ID = 'AXZYR21QVM5ZASSFWBDMNYZBKVBMMMUWA2SNNDTYPSJPPLC3';
-  var CLIENT_SECRET = '4GZZXEFSW50ZA0UKM2CJFMA5PSTLGVHW5NLZPEUEA2JG4ZRZ';
+    //initialize a map
+    var map = L.mapbox.map('map', 'mapbox.streets', {
+      zoomControl: true
+    }).setView([40.5008227, -74.4495878], 13); //long-lat of New Brunswick. zoom level : 13
 
-  // https://developer.foursquare.com/start/search
-  var API_ENDPOINT = 'https://api.foursquare.com/v2/venues/search' +
-    '?query=restaurant' + //create variable of categories and add here
-    '&client_id=CLIENT_ID' +
-    '&client_secret=CLIENT_SECRET' +
-    '&v=20140806' + //foursquare version year/month/day
-    '&ll=40.5008227,-74.4495878';
+    //manage auto zooming issue on page scroll
+    //map.dragging.disable();
+    map.touchZoom.disable();
+    map.doubleClickZoom.disable();
+    map.scrollWheelZoom.disable();
+    map.keyboard.disable();
 
-  // Keep our place markers organized in a nice group.
-  var foursquarePlaces = L.layerGroup().addTo(map);
+    //add a marker to the map
+    var marker = new L.Marker(new L.LatLng(40.5008227, -74.4495878)); //adds marker to these coordinates
+    map.addLayer(marker);
 
-  // Use jQuery to make an AJAX request to Foursquare to load markers data.
-  $.getJSON(API_ENDPOINT
-      .replace('CLIENT_ID', CLIENT_ID)
-      .replace('CLIENT_SECRET', CLIENT_SECRET)
-      .replace('LATLON', map.getCenter().lat +
-          ',' + map.getCenter().lng), function(result, status) {
+    // Mapbox
+    var geocoder = L.mapbox.geocoder('mapbox.places-v1');
+    geocoder.query('', showMap); //We can add the submitted review into this query to drop the pin
 
-      if (status !== 'success') return alert('Request to Foursquare failed');
-
-      // Transform each venue result into a marker on the map.
-      for (var i = 0; i < result.response.venues.length; i++) {
-        var venue = result.response.venues[i]; //can we attach an event to this venue or maybe marker below?
-        var latlng = L.latLng(venue.location.lat, venue.location.lng);
-        var marker = L.marker(latlng, {
-            icon: L.mapbox.marker.icon({
-              'marker-color': '#BE9A6B',
-              'marker-symbol': 'restaurant',
-              'marker-size': 'large'
-            })
-          })
-        .bindPopup('<strong><a href="https://foursquare.com/v/' + venue.id + '">' +
-          venue.name + '</a></strong>')
-          .addTo(foursquarePlaces);
+    function showMap(err, data) {
+      if (data.lbounds) {
+          map.fitBounds(data.lbounds);
+          var marker = L.marker([data.latlng[0], data.latlng[1]]).addTo(map);
+      } else if (data.latlng) {
+          map.setView([data.latlng[0], data.latlng[1]], 13);
       }
+    }
   });
 
-}); //end of doc.ready

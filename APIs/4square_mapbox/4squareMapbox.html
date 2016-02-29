@@ -28,8 +28,14 @@
 
     //initialize a map
     var map = L.mapbox.map('map', 'mapbox.streets', {
-      zoomControl: false
+      zoomControl: true
     }).setView([40.5008227, -74.4495878], 13); //long-lat of New Brunswick. zoom level : 13
+
+    map.dragging.disable();
+    map.touchZoom.disable();
+    map.doubleClickZoom.disable();
+    map.scrollWheelZoom.disable();
+    map.keyboard.disable();
 
     //add a marker to the map
     var marker = new L.Marker(new L.LatLng(40.5008227, -74.4495878)); //adds marker to these coordinates
