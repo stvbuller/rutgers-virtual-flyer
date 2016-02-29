@@ -118,23 +118,50 @@ var User = connection.define('user', {
   }
 });
 
+// var Review = connection.define('review', {
+//   establishment: {
+//     type: Sequelize.STRING
+//   },
+//   dining: {
+//     type: Sequelize.BOOLEAN
+//     },
+//   sports: {
+//     type: Sequelize.BOOLEAN
+//   },
+//   events: {
+//     type: Sequelize.BOOLEAN
+//   },
+//   things: {
+//     type: Sequelize.BOOLEAN
+//   },
+//   street: {
+//     type: Sequelize.STRING,
+//     alllowNull: false
+//   },
+//   city: {
+//     type: Sequelize.STRING,
+//     alllowNull: false
+//   },
+//   rating: {
+//     type: Sequelize.INTEGER,
+//     allowNull: false
+//   },
+//   review: {
+//     type: Sequelize.STRING,
+//     validate: {
+//       len: {
+//         args: [5,200],
+//         msg: "Your review must be between 5-200 characters"
+//       }
+//     }
+//   }
+// });
+
 var Review = connection.define('review', {
-  establishment: {
+  locationName: {
     type: Sequelize.STRING
   },
-  dining: {
-    type: Sequelize.BOOLEAN
-    },
-  sports: {
-    type: Sequelize.BOOLEAN
-  },
-  events: {
-    type: Sequelize.BOOLEAN
-  },
-  things: {
-    type: Sequelize.BOOLEAN
-  },
-  street: {
+  eventType: {
     type: Sequelize.STRING,
     alllowNull: false
   },
