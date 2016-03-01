@@ -47,19 +47,18 @@ app.use(passport.session());
 //passport use methed as callback when being authenticated
 passport.use(new passportLocal.Strategy(function(username, password, done) {
   //check password in db
-  console.log(username);
-  console.log(password);
   User.findOne({
     where: {
       username: username
     }
   }).then(function(user) {
+    console.log("WHAT IS", user);
     //check password against hash
     if(user) {
-      bcrypt.compare(password, user.dataValues.password, function(err, user) {
-        if (user) {
+      bcrypt.compare(password, user.dataValues.password, function(err, bcryptUser) {
+        if (bcryptUser) {
           //if password is correct authenticate the user with cookie
-          done(null, { id: username, username: username });
+          done(null, user);
         }
         else {
           done(null, null);
@@ -74,10 +73,17 @@ passport.use(new passportLocal.Strategy(function(username, password, done) {
 
 //change the object used to authenticate to a smaller token, and protects the server from attacks
 passport.serializeUser(function(user, done) {
-    done(null, user.id);
+  console.log('in serializeUser', user);
+  done(null, user);
 });
-passport.deserializeUser(function(id, done) {
-    done(null, { id: id, username: id })
+passport.deserializeUser(function(user, done) {
+  console.log('in deserializeUser', user);
+  done(null, user);
+
+  // User.findById(id, function(err, user) {
+  //   console.log('deserializeUser', user);
+  //   done(err, user);
+  // });
 });
 
 var bcrypt = require('bcryptjs');
@@ -236,7 +242,7 @@ app.get("/reviews", function(req, res) {
 });
 
 app.get("/home", function(req, res) {
-  console.log(res);
+  console.log('req.user', req.user);
   res.render('home', {
     user: req.user,
     isAuthenticated: req.isAuthenticated()
