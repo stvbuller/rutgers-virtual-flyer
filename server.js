@@ -242,13 +242,31 @@ app.post("/save", function(req, res) {
 });
 
 app.post("/saveRating", function(req, res) {
-  Review.create(req.body).then(function(result) {
+  var newReview = req.body;
+  newReview.userId = req.user.id;
+  Review.create(newReview).then(function(result) {
     res.redirect('/?msg=Review saved.');
   }).catch(function(err) {
     console.log(err);
     res.redirect('/?msg=' + err.message);
   });
 });
+
+// app.get('/reviews', function(req, res) {
+//   Review.findAll().then(function(reviews) {
+//     res.render()
+//   })
+// })
+
+// app.get('/test', function(req, res) {
+// ​
+//   User.findAll().then(function(users) {
+//     console.log(users);
+//     res.render('test', {
+//       users: users
+//     });
+//   });
+// });
 
 // database connection via sequelize
 connection.sync().then(function() {
