@@ -218,10 +218,10 @@ app.get("/", function(req, res){
 //test for map
 app.get('/test', function(req, res) {
 
-  User.findAll().then(function(users) {
-    console.log(users);
+  Review.findAll().then(function(reviews) {
+    console.log(reviews);
     res.render('test', {
-      users: users //left side = handlebars right side = data variable
+      reviews: reviews //left side = handlebars right side = data variable
     });
   });
 });
@@ -235,9 +235,13 @@ app.get('/test', function(req, res) {
 // });
 
 app.get("/reviews", function(req, res) {
-  res.render('reviews', {msg: req.query.msg,
-    user: req.user,
-    isAuthenticated: req.isAuthenticated()
+  Review.findAll().then(function(reviews) {
+    console.log(reviews);
+    res.render('reviews', {msg: req.query.msg,
+      user: req.user,
+      isAuthenticated: req.isAuthenticated(),
+      reviews: reviews //left side = handlebars right side = data variable
+    });
   });
 });
 
@@ -275,16 +279,6 @@ app.post("/saveRating", function(req, res) {
 //     res.render()
 //   })
 // })
-
-// app.get('/test', function(req, res) {
-// ​
-//   User.findAll().then(function(users) {
-//     console.log(users);
-//     res.render('test', {
-//       users: users
-//     });
-//   });
-// });
 
 // database connection via sequelize
 connection.sync().then(function() {
