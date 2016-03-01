@@ -7,6 +7,9 @@ $(document).ready(function() {
   //materialize parallax
   $('.parallax').parallax();
 
+  //for dropdown menu
+  $('select').material_select();
+
    //blank map
     //button to find your current location
     //create marker (address to long-lat)
