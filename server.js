@@ -169,7 +169,11 @@ var Review = connection.define('review', {
   },
   diningType: {
     type: Sequelize.STRING,
-    alllowNull: false
+    alllowNull: true
+  },
+  street: {
+    type: Sequelize.STRING,
+    alllowNull: true
   },
   city: {
     type: Sequelize.STRING,
