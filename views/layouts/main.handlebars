@@ -102,25 +102,27 @@
             <div class="input-field col s6">
               <label for="dining-type">Dining Type</label>
               <br />
-              <p id="dining-type" type="text" class="validate" name="diningType">
-                  <input class="with-gap" name="diningType" type="radio" id="test1" />
-                  <label for="test1">Restaurant</label>
 
-                  <input class="with-gap" name="diningType" type="radio" id="test2" />
-                  <label for="test2">Cafe</label>
-
-                  <input class="with-gap" name="diningType" type="radio" id="test3"  />
-                  <label for="test3">Bar</label>
-
-
-
-
-
-              </p>
+              <div class="input-field col s12">
+                <select name="diningType">
+                  <option value="" disabled selected>Choose your option</option>
+                  <option value="Restaurant">Restaurant</option>
+                  <option value="Cafe">Cafe</option>
+                  <option value="Bar">Bar</option>
+                </select>
+              </div>
 
 
             </div>
           </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="street" type="text" name="street">
+              <label for="street">Street</label>
+            </div>
+          </div>
+
+
           <div class="row">
             <div class="input-field col s12">
               <input id="city" type="text" name="city">
