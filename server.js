@@ -209,6 +209,17 @@ app.get("/", function(req, res){
   });
 });
 
+//test for map
+app.get('/test', function(req, res) {
+
+  User.findAll().then(function(users) {
+    console.log(users);
+    res.render('test', {
+      users: users //left side = handlebars right side = data variable
+    });
+  });
+});
+
 // app.get("/signup", function(req, res){
 //   res.render('signup');
 // });
