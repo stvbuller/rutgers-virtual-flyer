@@ -260,6 +260,7 @@ app.post("/save", function(req, res) {
 
 app.post("/saveRating", function(req, res) {
   var newReview = req.body;
+  console.log(newReview);
   newReview.userId = req.user.id;
   Review.create(newReview).then(function(result) {
     res.redirect('/?msg=Review saved.');
