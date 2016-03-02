@@ -124,44 +124,35 @@ var User = connection.define('user', {
   }
 });
 
-// var Review = connection.define('review', {
-//   establishment: {
-//     type: Sequelize.STRING
-//   },
-//   dining: {
-//     type: Sequelize.BOOLEAN
-//     },
-//   sports: {
-//     type: Sequelize.BOOLEAN
-//   },
-//   events: {
-//     type: Sequelize.BOOLEAN
-//   },
-//   things: {
-//     type: Sequelize.BOOLEAN
-//   },
-//   street: {
-//     type: Sequelize.STRING,
-//     alllowNull: false
-//   },
-//   city: {
-//     type: Sequelize.STRING,
-//     alllowNull: false
-//   },
-//   rating: {
-//     type: Sequelize.INTEGER,
-//     allowNull: false
-//   },
-//   review: {
-//     type: Sequelize.STRING,
-//     validate: {
-//       len: {
-//         args: [5,200],
-//         msg: "Your review must be between 5-200 characters"
-//       }
-//     }
-//   }
-// });
+
+/* TABLE OF REVIEWS
+var Review = sequelize.define('Review', {
+  comments: {
+    type: Sequelize.STRING
+  },
+  rating: {
+    type: Sequelize.INTEGER
+  }
+});
+*/
+
+/*  TABLE OF RESTAURANTS
+var Restaurant = sequelize.define('Restaurants', {
+  name: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  category: {
+    type: Sequelize.STRING
+  },
+  street: {
+    type: Sequelize.STRING
+  },
+  city: {
+    type: Sequelize.STRING
+  }
+});
+*/
 
 var Review = connection.define('review', {
   locationName: {
@@ -208,9 +199,6 @@ app.post('/check', passport.authenticate('local', {
   successRedirect: '/home',
   failureRedirect: '/?msg=Login Credentials do not work'
 }));
-// app.post('/check', function(req, res) {
-//   res.send("YOU ARE HERE");
-// });
 
 app.get("/", function(req, res){
   res.render('home', {msg: req.query.msg,
@@ -219,9 +207,9 @@ app.get("/", function(req, res){
   });
 });
 
-//test for map
+/*
+//TEST : DISPLAYS DATA FROM DATABASE
 app.get('/test', function(req, res) {
-
   Review.findAll().then(function(reviews) {
     console.log(reviews);
     res.render('test', {
@@ -229,24 +217,28 @@ app.get('/test', function(req, res) {
     });
   });
 });
+*/
 
-// app.get("/signup", function(req, res){
-//   res.render('signup');
-// });
-
-// app.get("/login", function(req, res){
-//   res.render('login');
-// });
-
-app.get("/reviews", function(req, res) {
+app.get("/test", function(req, res) {
   Review.findAll().then(function(reviews) {
     console.log(reviews);
-    res.render('reviews', {msg: req.query.msg,
+    res.render('reviews', {
+      msg: req.query.msg,
       user: req.user,
       isAuthenticated: req.isAuthenticated(),
       reviews: reviews //left side = handlebars right side = data variable
     });
   });
+});
+
+/*THIS IS A WORK IN PROGRESS -- DISPLAY REVIEWS BASED ON USER ID */
+app.get("/userPage", function(req, res){
+  Review.findAll({
+    where:{userid:'req.reviews.userId'}
+  }).then(function (reviews) {
+      console.log(reviews);
+      res.render('/?', {reviews: reviews});
+    });
 });
 
 app.get("/home", function(req, res) {
@@ -255,6 +247,12 @@ app.get("/home", function(req, res) {
     user: req.user,
     isAuthenticated: req.isAuthenticated()
   });
+});
+
+//LOGOUT USER
+app.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
 });
 
 app.post("/save", function(req, res) {
@@ -277,12 +275,6 @@ app.post("/saveRating", function(req, res) {
     res.redirect('/?msg=' + err.message);
   });
 });
-
-// app.get('/reviews', function(req, res) {
-//   Review.findAll().then(function(reviews) {
-//     res.render()
-//   })
-// })
 
 // database connection via sequelize
 connection.sync().then(function() {
