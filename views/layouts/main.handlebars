@@ -14,8 +14,12 @@
       <div class="container">
         <a href="/" class="brand-logo">RU Review</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
-          <li><span class="white-text accent-4">{{#if isAuthenticated}} Hello {{ user.firstname }} {{/if}}</span></li>
-          {{#if isAuthenticated }} {{ else }}
+          <li><span class="white-text accent-4">{{#if isAuthenticated}} Hello {{ user.firstname }}
+          <li><a href="/logout">Logout</a></li>
+          {{/if}}</span></li>
+          {{#if isAuthenticated }} 
+
+          {{ else }}
           <li><a class="waves-effect waves-light btn modal-trigger white" href="#login-modal"><span class="red-text accent-4">Login</span></a></li>
           <li><a class="waves-effect waves-light btn modal-trigger white" href="#signup-modal"><span class="red-text accent-4">Signup</span></a></li>
           {{/if}}
@@ -99,30 +103,22 @@
               <input id="location-name" type="text" class="validate" name="locationName">
               <label for="location-name">Location Name</label>
             </div>
+
             <div class="input-field col s6">
               <label for="dining-type">Dining Type</label>
               <br />
+              <p id="dining-type" type="text" class="validate" name="diningType">
+                  <input class="with-gap" name="diningType" type="radio" id="test1" />
+                  <label for="test1">Restaurant</label>
 
-              <div class="input-field col s12">
-                <select name="diningType">
-                  <option value="" disabled selected>Choose your option</option>
-                  <option value="Restaurant">Restaurant</option>
-                  <option value="Cafe">Cafe</option>
-                  <option value="Bar">Bar</option>
-                </select>
-              </div>
+                  <input class="with-gap" name="diningType" type="radio" id="test2" />
+                  <label for="test2">Cafe</label>
 
-
+                  <input class="with-gap" name="diningType" type="radio" id="test3"  />
+                  <label for="test3">Bar</label>
+              </p>
             </div>
           </div>
-          <div class="row">
-            <div class="input-field col s12">
-              <input id="street" type="text" name="street">
-              <label for="street">Street</label>
-            </div>
-          </div>
-
-
           <div class="row">
             <div class="input-field col s12">
               <input id="city" type="text" name="city">
