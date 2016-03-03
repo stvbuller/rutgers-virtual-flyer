@@ -52,7 +52,7 @@ passport.use(new passportLocal.Strategy(function(username, password, done) {
       username: username
     }
   }).then(function(user) {
-    console.log("WHAT IS", user);
+    //console.log("WHAT IS", user);
     //check password against hash
     if(user) {
       bcrypt.compare(password, user.dataValues.password, function(err, bcryptUser) {
@@ -73,11 +73,11 @@ passport.use(new passportLocal.Strategy(function(username, password, done) {
 
 //change the object used to authenticate to a smaller token, and protects the server from attacks
 passport.serializeUser(function(user, done) {
-  console.log('in serializeUser', user);
+  //console.log('in serializeUser', user);
   done(null, user);
 });
 passport.deserializeUser(function(user, done) {
-  console.log('in deserializeUser', user);
+  //console.log('in deserializeUser', user);
   done(null, user);
 
   // User.findById(id, function(err, user) {
@@ -219,7 +219,7 @@ app.get("/", function(req, res){
 
 app.get("/", function(req, res){
   Review.findAll().then(function(reviews) {
-    console.log(reviews);
+    //console.log(reviews);
     res.render('home', {
       msg: req.query.msg,
       user: req.user,
@@ -239,9 +239,9 @@ app.get("/jj", function(req, res){
       }
     }
   }
-  console.log("Where is", where);
+  //console.log("Where is", where);
   Review.findAll(where).then(function(reviews) {
-    console.log(reviews);
+    //console.log(reviews);
     res.render('test', {
       msg: req.query.msg,
       user: req.user,
@@ -307,7 +307,7 @@ app.post("/save", function(req, res) {
 
 app.post("/saveRating", function(req, res) {
   var newReview = req.body;
-  console.log(newReview);
+  //console.log(newReview);
   newReview.userId = req.user.id;
   Review.create(newReview).then(function(result) {
     res.redirect('/?msg=Review saved.');
@@ -316,6 +316,65 @@ app.post("/saveRating", function(req, res) {
     res.redirect('/?msg=' + err.message);
   });
 });
+
+//used to get a review from the reviews table by it's id
+app.get("/edit:id", function(req, res) {
+  //console.log("params id " + req.params.id);
+  var reviewId = req.params.id;
+  Review.findAll({
+    where: {
+      id: reviewId
+    }
+  }).then(function(reviews) {
+    //console.log(reviews);
+    res.render('editReview', {
+      msg: req.query.msg,
+      user: req.user,
+      isAuthenticated: req.isAuthenticated(),
+      reviews: reviews //left side = handlebars right side = data variable
+    });
+  });
+});
+
+//updates the review record in the table- work in progress
+app.post("/updateReview:id", function(req, res) {
+  var newReview = req.body.review;
+  var newRating = req.body.rating;
+  var reviewId = req.params.id;
+  console.log(req.body);
+  console.log(newReview);
+  console.log(newRating);
+  console.log(reviewId);
+
+  Review.update({
+        review: newReview,
+        rating: newRating,
+      },
+      {
+        where: {id: reviewId}
+      }).then(function(result) {
+      res.redirect('/?msg=Review updated.');
+      }).catch(function(err) {
+        console.log(err);
+        res.redirect('/?msg=' + err.message);
+      });
+
+
+  // Review.findAll({ where: {id: 'reviewId'} }).on('success', function(review) {
+  //   if (review) { // if the record exists in the db
+  //     review.updateAttributes({
+  //       review: newReview,
+  //       rating: newRating
+  //     }).then(function(result) {
+  //     res.redirect('/?msg=Review updated.');
+  //     }).catch(function(err) {
+  //       console.log(err);
+  //       res.redirect('/?msg=' + err.message);
+  //     });
+  //   };
+  // });
+});
+
 
 // database connection via sequelize
 connection.sync().then(function() {
