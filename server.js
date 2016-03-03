@@ -336,22 +336,43 @@ app.get("/edit:id", function(req, res) {
   });
 });
 
-//updates the review - work in progress
-// app.post("/updateReview", function(req, res) {
-//   //var newReview = req.body;
-//   console.log(req.body);
-//   //newReview.userId = req.user.id;
-//   Review.update({
-//     where: {
-//       id: req.params.id
-//     }
-//   }).then(function(result) {
-//     res.redirect('/?msg=Review updated.');
-//   }).catch(function(err) {
-//     console.log(err);
-//     res.redirect('/?msg=' + err.message);
-//   });
-// });
+//updates the review record in the table- work in progress
+app.post("/updateReview:id", function(req, res) {
+  var newReview = req.body.review;
+  var newRating = req.body.rating;
+  var reviewId = req.params.id;
+  console.log(req.body);
+  console.log(newReview);
+  console.log(newRating);
+  console.log(reviewId);
+
+  Review.update({
+        where: {id: reviewId},
+        review: newReview,
+        rating: newRating
+      }).then(function(result) {
+      res.redirect('/?msg=Review updated.');
+      }).catch(function(err) {
+        console.log(err);
+        res.redirect('/?msg=' + err.message);
+      });
+
+
+  // Review.findAll({ where: {id: 'reviewId'} }).on('success', function(review) {
+  //   if (review) { // if the record exists in the db
+  //     review.updateAttributes({
+  //       review: newReview,
+  //       rating: newRating
+  //     }).then(function(result) {
+  //     res.redirect('/?msg=Review updated.');
+  //     }).catch(function(err) {
+  //       console.log(err);
+  //       res.redirect('/?msg=' + err.message);
+  //     });
+  //   };
+  // });
+});
+
 
 // database connection via sequelize
 connection.sync().then(function() {
