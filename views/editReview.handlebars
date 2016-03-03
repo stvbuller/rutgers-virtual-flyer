@@ -1,0 +1,29 @@
+
+<div class="section white">
+  <div class="row container">
+    <div class="col s12">
+    <h3>Update the Review</h3>
+      <div class="row">
+        {{#each reviews}}
+          <div class="row">
+            <div class="col-md-12">
+              <ul class="collection">
+                <li class="collection-item">
+                  <h4>{{locationName}}</h4>
+                  <b>{{city}}</b><br />
+                  {{rating}} star rating<br />
+                  <form action="/updateReview" method="post">
+                    <label for="rating">Star Rating</label>
+                    <textarea name="rating" rows="2" cols="30">{{rating}}</textarea>
+                    <label for="review">Review</label>
+                    <textarea name="review" rows="2" cols="30">{{review}}</textarea>
+                    <button type="submit" class="btn waves-effect waves-white btn-flat">Update Review</button>
+                  <form>
+
+                </li>
+              </ul>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+    </div> <!-- end col s12 -->

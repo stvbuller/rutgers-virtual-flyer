@@ -13,7 +13,7 @@
                   {{rating}} star rating<br />
                   <blockquote>{{review}}</blockquote>
                   <div class="right-align">
-                    {{#if ../isAuthenticated}}<a href="/edit" class="waves-effect waves-light btn modal-trigger white"><span class="red-text accent-4"><i class="fa fa-pencil"></i></span></a>
+                    {{#if ../isAuthenticated}}<a href="/edit{{id}}" class="waves-effect waves-light btn modal-trigger white"><span class="red-text accent-4"><i class="fa fa-pencil"></i></span></a>
                     <a href="" class="waves-effect waves-light btn modal-trigger white"><span class="red-text accent-4"><i class="fa fa-trash deleteBtn" data-id="{{id}}"></i></span></a>
                     {{/if}}
                   </div>
@@ -25,7 +25,7 @@
       </div>
     </div> <!-- end col s12 -->
 
-    
+
 
     <!--  <div class="col s12 m6" id="test">
       <div id="filter">
