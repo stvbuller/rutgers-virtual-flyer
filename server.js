@@ -216,7 +216,20 @@ app.get("/", function(req, res){
 */
 
 //DISPLAY REVIEWS BY ID: IF LOGGED IN, JUST YOUR ID. IF NOT ALL REVIEWS
+
 app.get("/", function(req, res){
+  Review.findAll().then(function(reviews) {
+    console.log(reviews);
+    res.render('home', {
+      msg: req.query.msg,
+      user: req.user,
+      isAuthenticated: req.isAuthenticated(),
+      reviews: reviews //left side = handlebars right side = data variable
+    });
+  });
+});
+
+app.get("/jj", function(req, res){
   console.log('user is', req.user);
   var where = {};
   if(req.user) {
@@ -303,8 +316,6 @@ app.post("/saveRating", function(req, res) {
     res.redirect('/?msg=' + err.message);
   });
 });
-
-app.
 
 // database connection via sequelize
 connection.sync().then(function() {
