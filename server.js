@@ -178,13 +178,13 @@ var Review = connection.define('review', {
   }
 });
 
-//CREATE BULK RESTAURANTS WITH REVIEWS FOR TESTING
+/*CREATE BULK RESTAURANTS WITH REVIEWS FOR TESTING
 Review.bulkCreate([
   {locationName: 'Scarlet Pub', diningtype: 'bar', street: '131 Easton Ave', city: 'New Brunswick', rating: 3, review: 'This place is pretty cool. Cheap beer.'},
   {locationName: 'Harvest Moon Brewery', diningtype: 'bar', street: '392 George St', city: 'New Brunswick', rating: 4, review: 'Whole lotta beer'},
   {locationName: 'Evelyn\'s Restaurant', diningtype: 'restaurant', street: '45 Easton Ave', city: 'New Brunswick', rating: 1, review: 'The go to spot for Middle Eastern plates'},
   {locationName: 'Pizza Hut', diningtype: 'restaurant', street:'1135 Easton Ave' , city: 'Somerset', rating: 1, review: 'Why would anyone ever go here?'},
-], { validate: true });
+], { validate: true }); */
 
 
 User.hasMany(Review);
@@ -212,7 +212,7 @@ app.post('/check', passport.authenticate('local', {
   failureRedirect: '/?msg=Login Credentials do not work'
 }));
 
-//GET ALL REVIEWS. IF AUTHENTICATED ALLOW EDITING
+//GET ALL REVIEWS. IF AUTHENTICATED ALLOW EDITING (SHOWS BUTTONS)
 app.get("/", function(req, res){
   Review.findAll().then(function(reviews) {
     //console.log(reviews);
@@ -221,6 +221,21 @@ app.get("/", function(req, res){
       user: req.user,
       isAuthenticated: req.isAuthenticated(),
       reviews: reviews //left side = handlebars right side = data variable
+    });
+  });
+});
+
+//GET REVIEWS USING FILTRATION. NEED TO CHANGE THIS TO DININGTYPE AFTER DB CORRECTION
+app.get('/filter/:city', function(req, res){
+  var city = req.params.city;
+  Review.findAll({
+    where: {
+      city : city
+    }
+  }).then(function(reviews){
+    console.log(reviews);
+    res.render("home", {
+      reviews: reviews
     });
   });
 });
@@ -280,7 +295,7 @@ app.post("/updateReview:id", function(req, res) {
   });
 });
 
-//GETS REVIEW BY REVIEW ID AND DELETES IT
+//GETS REVIEW BY REVIEWID AND DELETES IT
 app.get("/deleteReview:id", function(req, res) {
   var reviewId = req.params.id;
   console.log(reviewId);
