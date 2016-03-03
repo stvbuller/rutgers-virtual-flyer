@@ -196,7 +196,7 @@ app.set('view engine', 'handlebars');
 
 //check login with db
 app.post('/check', passport.authenticate('local', {
-  successRedirect: '/home',
+  successRedirect: '/',
   failureRedirect: '/?msg=Login Credentials do not work'
 }));
 
@@ -261,14 +261,6 @@ app.get('/info/:name', function(req, res){
   }).catch(function(err){
     console.log(err);
     res.redirect('/?msg=Error');
-  });
-});
-
-app.get("/home", function(req, res) {
-  console.log('req.user', req.user);
-  res.render('home', {
-    user: req.user,
-    isAuthenticated: req.isAuthenticated()
   });
 });
 
