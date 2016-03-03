@@ -14,17 +14,35 @@
       <div class="container">
         <a href="/" class="brand-logo">RU Review</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
-          <li><span class="white-text accent-4">{{#if isAuthenticated}} Hello {{{ user.username }}} {{/if}}</span></li>
+          <li><span class="white-text accent-4">{{#if isAuthenticated}} Hello {{ user.firstname }}
+          <li><a href="/logout" class="waves-effect waves-light btn modal-trigger white"><span class="red-text accent-4">Logout</span></a></li>
+          {{/if}}</span></li>
+          {{#if isAuthenticated }}
+
+          {{ else }}
           <li><a class="waves-effect waves-light btn modal-trigger white" href="#login-modal"><span class="red-text accent-4">Login</span></a></li>
           <li><a class="waves-effect waves-light btn modal-trigger white" href="#signup-modal"><span class="red-text accent-4">Signup</span></a></li>
+          {{/if}}
         </ul>
       </div>
     </div>
   </nav>
 
   <main>
-    {{{ body }}}
+    <div class="parallax-container center-align">
+      <h1 class="text-shadow" data-wow-delay="2.5s"><span class="white-text">RU Review</span></h1>
+      <h4 class="text-shadow" data-wow-delay="3.5s"><span class="white-text">Read and Write Reviews of Your Favorite Rutgers Spots</i></h4>
+      <button class="waves-effect waves-light btn modal-trigger white" href="#rate-modal"><i class="fa fa-star red-text accent-4"></i> <span class="red-text accent-4">Rate and Review</span></button>
+      <a class="waves-effect waves-light btn modal-trigger white" href="/reviews"><i class="fa fa-file-text red-text accent-4"></i> <span class="red-text accent-4">Read Reviews</span></a>
+      <div class="parallax">
+        <img src="/images/coffeemugs.jpg">
+      </div>
+    </div>
+    <div class="container">
+      {{{ body }}}
+    </div>
   </main>
+
    <aside>
      <div id="login-modal" class="modal">
       <form id="formLogin" class="col s12" method="POST" action="/check">
@@ -97,9 +115,20 @@
               <input id="location-name" type="text" class="validate" name="locationName">
               <label for="location-name">Location Name</label>
             </div>
+
             <div class="input-field col s6">
-              <input id="event-type" type="text" class="validate" name="eventType">
-              <label for="event-type">Event Type</label>
+              <label for="dining-type">Dining Type</label>
+              <br />
+              <p id="dining-type" type="text" class="validate" name="diningType">
+                  <input class="with-gap" name="diningType" type="radio" id="test1" />
+                  <label for="test1">Restaurant</label>
+
+                  <input class="with-gap" name="diningType" type="radio" id="test2" />
+                  <label for="test2">Cafe</label>
+
+                  <input class="with-gap" name="diningType" type="radio" id="test3"  />
+                  <label for="test3">Bar</label>
+              </p>
             </div>
           </div>
           <div class="row">
