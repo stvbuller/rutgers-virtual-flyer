@@ -262,8 +262,6 @@ app.get('/test', function(req, res) {
 });
 */
 
-
-
 /*IN PROGRESS -- DISPLAY ALL REVIEWS FOR PARTICULAR RESTAURANT*/
 app.get('/info/:name', function(req, res){
   Restaurant.findOne({
@@ -276,14 +274,6 @@ app.get('/info/:name', function(req, res){
   }).catch(function(err){
     console.log(err);
     res.redirect('/?msg=Error');
-  });
-});
-
-app.get("/home", function(req, res) {
-  console.log('req.user', req.user);
-  res.render('home', {
-    user: req.user,
-    isAuthenticated: req.isAuthenticated()
   });
 });
 
