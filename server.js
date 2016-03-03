@@ -304,6 +304,8 @@ app.post("/saveRating", function(req, res) {
   });
 });
 
+app.
+
 // database connection via sequelize
 connection.sync().then(function() {
   app.listen(PORT, function() {
