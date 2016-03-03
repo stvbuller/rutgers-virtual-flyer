@@ -1,32 +1,48 @@
-<div class="parallax-container center-align">
-  <h1 class="text-shadow" data-wow-delay="2.5s"><span class="white-text">RU Review</span></h1>
-    <h4 class="text-shadow" data-wow-delay="3.5s"><span class="white-text">Read and Write Reviews of Your Favorite Rutgers Spots</i></h4>
-    <button class="waves-effect waves-light btn modal-trigger white" href="#rate-modal"><i class="fa fa-star red-text accent-4"></i> <span class="red-text accent-4">Rate and Review</span></button>
-    <a class="waves-effect waves-light btn modal-trigger white" href="/reviews"><i class="fa fa-file-text red-text accent-4"></i> <span class="red-text accent-4">Read Reviews</span></a>
-  <div class="parallax"><img src="/images/collegeAve.jpg"></div>
-</div>
-
 <div class="section white">
   <div class="row container">
-     <div class="col s12 m6" id="test">
+    <div class="col s12">
+    <h3>Latest Reviews</h3>
+      <div class="row">
+        {{#each reviews}}
+          <div class="row">
+            <div class="col-md-12">
+              <ul class="collection">
+                <li class="collection-item">
+                  <h4>{{locationName}}</h4>
+                  <b>{{city}}</b><br />
+                  {{rating}} star rating<br />
+                  <q>{{review}}</q>
+                </li>
+              </ul>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+    </div> <!-- end col s12 -->
+
+
+
+    
+
+    <!--  <div class="col s12 m6" id="test">
       <div id="filter">
         <form action="#">
-        <!--DINING-->
+
           <p>
             <input type="checkbox" id="dining" checked="checked"  />
             <label for="dining">Dining</label>
           </p>
-          <!--RU SPORTS-->
+
           <p>
             <input type="checkbox" id="ru_sports" />
             <label for="ru_sports">RU Sports</label>
           </p>
-          <!--ON-CAMPUS EVENTS-->
+
           <p>
             <input type="checkbox" id="campus_events" />
             <label for="campus_events">On-Campus Events</label>
           </p>
-          <!--RECREATION-->
+
           <p>
             <input type="checkbox" id="recreation" />
             <label for="recreation">Things-to-do</label>
@@ -36,7 +52,7 @@
     </div>
     <div class="parallax-container">
      <div id='map'></div>
-    </div>
+    </div> -->
 
   </div>
 </div>

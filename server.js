@@ -47,19 +47,18 @@ app.use(passport.session());
 //passport use methed as callback when being authenticated
 passport.use(new passportLocal.Strategy(function(username, password, done) {
   //check password in db
-  console.log(username);
-  console.log(password);
   User.findOne({
     where: {
       username: username
     }
   }).then(function(user) {
+    console.log("WHAT IS", user);
     //check password against hash
     if(user) {
-      bcrypt.compare(password, user.dataValues.password, function(err, user) {
-        if (user) {
+      bcrypt.compare(password, user.dataValues.password, function(err, bcryptUser) {
+        if (bcryptUser) {
           //if password is correct authenticate the user with cookie
-          done(null, { id: username, username: username });
+          done(null, user);
         }
         else {
           done(null, null);
@@ -74,10 +73,17 @@ passport.use(new passportLocal.Strategy(function(username, password, done) {
 
 //change the object used to authenticate to a smaller token, and protects the server from attacks
 passport.serializeUser(function(user, done) {
-    done(null, user.id);
+  console.log('in serializeUser', user);
+  done(null, user);
 });
-passport.deserializeUser(function(id, done) {
-    done(null, { id: id, username: id })
+passport.deserializeUser(function(user, done) {
+  console.log('in deserializeUser', user);
+  done(null, user);
+
+  // User.findById(id, function(err, user) {
+  //   console.log('deserializeUser', user);
+  //   done(err, user);
+  // });
 });
 
 var bcrypt = require('bcryptjs');
@@ -118,52 +124,47 @@ var User = connection.define('user', {
   }
 });
 
-// var Review = connection.define('review', {
-//   establishment: {
-//     type: Sequelize.STRING
-//   },
-//   dining: {
-//     type: Sequelize.BOOLEAN
-//     },
-//   sports: {
-//     type: Sequelize.BOOLEAN
-//   },
-//   events: {
-//     type: Sequelize.BOOLEAN
-//   },
-//   things: {
-//     type: Sequelize.BOOLEAN
-//   },
-//   street: {
-//     type: Sequelize.STRING,
-//     alllowNull: false
-//   },
-//   city: {
-//     type: Sequelize.STRING,
-//     alllowNull: false
-//   },
-//   rating: {
-//     type: Sequelize.INTEGER,
-//     allowNull: false
-//   },
-//   review: {
-//     type: Sequelize.STRING,
-//     validate: {
-//       len: {
-//         args: [5,200],
-//         msg: "Your review must be between 5-200 characters"
-//       }
-//     }
-//   }
-// });
+
+/* TABLE OF REVIEWS
+var Review = sequelize.define('Review', {
+  comments: {
+    type: Sequelize.STRING
+  },
+  rating: {
+    type: Sequelize.INTEGER
+  }
+});
+*/
+
+/*  TABLE OF RESTAURANTS
+var Restaurant = sequelize.define('Restaurants', {
+  name: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  category: {
+    type: Sequelize.STRING
+  },
+  street: {
+    type: Sequelize.STRING
+  },
+  city: {
+    type: Sequelize.STRING
+  }
+});
+*/
 
 var Review = connection.define('review', {
   locationName: {
     type: Sequelize.STRING
   },
-  eventType: {
+  diningType: {
     type: Sequelize.STRING,
-    alllowNull: false
+    alllowNull: true
+  },
+  street: {
+    type: Sequelize.STRING,
+    alllowNull: true
   },
   city: {
     type: Sequelize.STRING,
@@ -198,32 +199,83 @@ app.post('/check', passport.authenticate('local', {
   successRedirect: '/home',
   failureRedirect: '/?msg=Login Credentials do not work'
 }));
-// app.post('/check', function(req, res) {
-//   res.send("YOU ARE HERE");
-// });
 
 app.get("/", function(req, res){
-  res.render('home', {msg: req.query.msg});
+  Review.findAll().then(function(reviews) {
+    console.log(reviews);
+    res.render('home', {
+      msg: req.query.msg,
+      user: req.user,
+      isAuthenticated: req.isAuthenticated(),
+      reviews: reviews //left side = handlebars right side = data variable
+    });
+  });
 });
 
-// app.get("/signup", function(req, res){
-//   res.render('signup');
-// });
+/*
+app.get("/test", function(req, res) {
+  Review.findAll().then(function(reviews) {
+    console.log(reviews);
+    res.render('reviews', {
+      msg: req.query.msg,
+      user: req.user,
+      isAuthenticated: req.isAuthenticated(),
+      reviews: reviews //left side = handlebars right side = data variable
+    });
+  });
+});
+*/
+/*
+//TEST : DISPLAYS DATA FROM DATABASE
+app.get('/test', function(req, res) {
+  Review.findAll().then(function(reviews) {
+    console.log(reviews);
+    res.render('test', {
+      reviews: reviews //left side = handlebars right side = data variable
+    });
+  });
+});
+*/
 
-// app.get("/login", function(req, res){
-//   res.render('login');
-// });
+/*IN PROGRESS -- DISPLAY REVIEWS BASED ON USER ID FOR UPDATING */
+app.get("/userPage", function(req, res){
+  Review.findAll({
+    where:{
+      userId:'req.reviews.userId' //this doesn't work
+    }
+  }).then(function (reviews) {
+      console.log(reviews);
+      res.render('test', {reviews: reviews});
+    });
+});
 
-app.get("/reviews", function(req, res) {
-  res.render('reviews');
+/*IN PROGRESS -- DISPLAY ALL REVIEWS FOR PARTICULAR RESTAURANT*/
+app.get('/info/:name', function(req, res){
+  Restaurant.findOne({
+    where: {
+      name: req.params.name
+    }
+  }).then(function(Restaurant){
+    console.log(Restaurant);
+    res.render('?', {restaurant: restaurant});
+  }).catch(function(err){
+    console.log(err);
+    res.redirect('/?msg=Error');
+  });
 });
 
 app.get("/home", function(req, res) {
-  console.log(res);
+  console.log('req.user', req.user);
   res.render('home', {
     user: req.user,
     isAuthenticated: req.isAuthenticated()
   });
+});
+
+//LOGOUT USER
+app.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
 });
 
 app.post("/save", function(req, res) {
@@ -236,7 +288,10 @@ app.post("/save", function(req, res) {
 });
 
 app.post("/saveRating", function(req, res) {
-  Review.create(req.body).then(function(result) {
+  var newReview = req.body;
+  console.log(newReview);
+  newReview.userId = req.user.id;
+  Review.create(newReview).then(function(result) {
     res.redirect('/?msg=Review saved.');
   }).catch(function(err) {
     console.log(err);
