@@ -196,7 +196,7 @@ app.set('view engine', 'handlebars');
 
 //check login with db
 app.post('/check', passport.authenticate('local', {
-  successRedirect: '/home',
+  successRedirect: '/',
   failureRedirect: '/?msg=Login Credentials do not work'
 }));
 
@@ -217,12 +217,16 @@ app.get("/", function(req, res){
 
 //DISPLAY REVIEWS BY ID: IF LOGGED IN, JUST YOUR ID. IF NOT ALL REVIEWS
 app.get("/", function(req, res){
+  console.log('user is', req.user);
   var where = {};
   if(req.user) {
     where = {
-      UserId: req.user.id
+      where: {
+        userId: req.user.id
+      }
     }
   }
+  console.log("Where is", where);
   Review.findAll(where).then(function(reviews) {
     console.log(reviews);
     res.render('test', {
