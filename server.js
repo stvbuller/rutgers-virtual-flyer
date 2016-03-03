@@ -347,9 +347,11 @@ app.post("/updateReview:id", function(req, res) {
   console.log(reviewId);
 
   Review.update({
-        where: {id: reviewId},
         review: newReview,
-        rating: newRating
+        rating: newRating,
+      },
+      {
+        where: {id: reviewId}
       }).then(function(result) {
       res.redirect('/?msg=Review updated.');
       }).catch(function(err) {
