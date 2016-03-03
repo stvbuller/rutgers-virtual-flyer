@@ -9,13 +9,11 @@ require('dotenv').config();
 var mysql = require('mysql')
 var Sequelize = require('sequelize');
 
-// This connection is for heroku app and must be commented back in before deploying to heroku
+//This connection is for heroku app and must be commented back in before deploying to heroku
 //with heroku use this:
 //console.log(process.env.JAWSDB_URL);
 //var connection = new Sequelize(process.env.JAWSDB_URL);
 
-//local test:
-//This connection is to test locally and must be commented out before deploying to heroku
 var connection = new Sequelize('rutgers_flyer_db', 'root');
 
 if(process.env.NODE_ENV === 'production') {
@@ -44,7 +42,7 @@ app.use(require('express-session')({
 app.use(passport.initialize());
 app.use(passport.session());
 
-//passport use methed as callback when being authenticated
+//passport use method as callback when being authenticated
 passport.use(new passportLocal.Strategy(function(username, password, done) {
   //check password in db
   User.findOne({
@@ -79,11 +77,6 @@ passport.serializeUser(function(user, done) {
 passport.deserializeUser(function(user, done) {
   //console.log('in deserializeUser', user);
   done(null, user);
-
-  // User.findById(id, function(err, user) {
-  //   console.log('deserializeUser', user);
-  //   done(err, user);
-  // });
 });
 
 var bcrypt = require('bcryptjs');
@@ -185,6 +178,15 @@ var Review = connection.define('review', {
   }
 });
 
+//CREATE BULK RESTAURANTS WITH REVIEWS FOR TESTING
+Review.bulkCreate([
+  {locationName: 'Scarlet Pub', diningtype: 'bar', street: '131 Easton Ave', city: 'New Brunswick', rating: 3, review: 'This place is pretty cool. Cheap beer.'},
+  {locationName: 'Harvest Moon Brewery', diningtype: 'bar', street: '392 George St', city: 'New Brunswick', rating: 4, review: 'Whole lotta beer'},
+  {locationName: 'Evelyn\'s Restaurant', diningtype: 'restaurant', street: '45 Easton Ave', city: 'New Brunswick', rating: 1, review: 'The go to spot for Middle Eastern plates'},
+  {locationName: 'Pizza Hut', diningtype: 'restaurant', street:'1135 Easton Ave' , city: 'Somerset', rating: 1, review: 'Why would anyone ever go here?'},
+], { validate: true });
+
+
 User.hasMany(Review);
 
 //handlebars setup
@@ -194,108 +196,7 @@ app.engine('handlebars', expressHandlebars({
 }));
 app.set('view engine', 'handlebars');
 
-//check login with db
-app.post('/check', passport.authenticate('local', {
-  successRedirect: '/',
-  failureRedirect: '/?msg=Login Credentials do not work'
-}));
-
-//DISPLAY ALL RESTAURANTS WITH REVIEWS :WORKS!
-/*
-app.get("/", function(req, res){
-  Review.findAll().then(function(reviews) {
-    console.log(reviews);
-    res.render('home', {
-      msg: req.query.msg,
-      user: req.user,
-      isAuthenticated: req.isAuthenticated(),
-      reviews: reviews //left side = handlebars right side = data variable
-    });
-  });
-});
-*/
-
-//DISPLAY REVIEWS BY ID: IF LOGGED IN, JUST YOUR ID. IF NOT ALL REVIEWS
-
-app.get("/", function(req, res){
-  Review.findAll().then(function(reviews) {
-    //console.log(reviews);
-    res.render('home', {
-      msg: req.query.msg,
-      user: req.user,
-      isAuthenticated: req.isAuthenticated(),
-      reviews: reviews //left side = handlebars right side = data variable
-    });
-  });
-});
-
-app.get("/jj", function(req, res){
-  console.log('user is', req.user);
-  var where = {};
-  if(req.user) {
-    where = {
-      where: {
-        userId: req.user.id
-      }
-    }
-  }
-  //console.log("Where is", where);
-  Review.findAll(where).then(function(reviews) {
-    //console.log(reviews);
-    res.render('test', {
-      msg: req.query.msg,
-      user: req.user,
-      isAuthenticated: req.isAuthenticated(),
-      reviews: reviews //left side = handlebars right side = data variable
-    });
-  });
-});
-
-app.get("/test", function(req, res) {
-  Review.findAll().then(function(reviews) {
-    console.log(reviews);
-    res.render('reviews', {
-      msg: req.query.msg,
-      user: req.user,
-      isAuthenticated: req.isAuthenticated(),
-      reviews: reviews //left side = handlebars right side = data variable
-    });
-  });
-});
-
-/*
-//TEST : DISPLAYS DATA FROM DATABASE
-app.get('/test', function(req, res) {
-  Review.findAll().then(function(reviews) {
-    console.log(reviews);
-    res.render('test', {
-      reviews: reviews //left side = handlebars right side = data variable
-    });
-  });
-});
-*/
-
-/*IN PROGRESS -- DISPLAY ALL REVIEWS FOR PARTICULAR RESTAURANT*/
-app.get('/info/:name', function(req, res){
-  Restaurant.findOne({
-    where: {
-      name: req.params.name
-    }
-  }).then(function(Restaurant){
-    console.log(Restaurant);
-    res.render('?', {restaurant: restaurant});
-  }).catch(function(err){
-    console.log(err);
-    res.redirect('/?msg=Error');
-  });
-});
-
-//LOGOUT USER
-app.get('/logout', function(req, res){
-  req.logout();
-  res.redirect('/');
-});
-
+//POST DATA FROM MODAL IN MAIN TO CREATE USER
 app.post("/save", function(req, res) {
   User.create(req.body).then(function(result) {
     res.redirect('/?msg=Account created. You may log in.');
@@ -305,6 +206,26 @@ app.post("/save", function(req, res) {
   });
 });
 
+//POST DATA FROM MODAL IN MAIN AND CHECK FOR LOGIN
+app.post('/check', passport.authenticate('local', {
+  successRedirect: '/',
+  failureRedirect: '/?msg=Login Credentials do not work'
+}));
+
+//GET ALL REVIEWS. IF AUTHENTICATED ALLOW EDITING
+app.get("/", function(req, res){
+  Review.findAll().then(function(reviews) {
+    //console.log(reviews);
+    res.render('home', {
+      msg: req.query.msg,
+      user: req.user,
+      isAuthenticated: req.isAuthenticated(),
+      reviews: reviews //left side = handlebars right side = data variable
+    });
+  });
+});
+
+//USER POSTS FROM MODAL IN MAIN TO CREATE REVIEW
 app.post("/saveRating", function(req, res) {
   var newReview = req.body;
   //console.log(newReview);
@@ -317,7 +238,7 @@ app.post("/saveRating", function(req, res) {
   });
 });
 
-//used to get a review from the reviews table by it's id
+//GETS REVIEWS FROM REVIEW TABLE BY ID SENDS TO EDITREVIEW FOR EDITING
 app.get("/edit:id", function(req, res) {
   //console.log("params id " + req.params.id);
   var reviewId = req.params.id;
@@ -336,7 +257,7 @@ app.get("/edit:id", function(req, res) {
   });
 });
 
-//updates the review record in the review table
+//POSTS UPDATED REVIEW TO TABLE AND REDIRECTS TO INDEX
 app.post("/updateReview:id", function(req, res) {
   var newReview = req.body.review;
   var newRating = req.body.rating;
@@ -359,8 +280,7 @@ app.post("/updateReview:id", function(req, res) {
   });
 });
 
-
-//deletes a review record in the review table
+//GETS REVIEW BY REVIEW ID AND DELETES IT
 app.get("/deleteReview:id", function(req, res) {
   var reviewId = req.params.id;
   console.log(reviewId);
@@ -375,8 +295,13 @@ app.get("/deleteReview:id", function(req, res) {
     });
 });
 
+//LOGOUT USER
+app.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
+});
 
-// database connection via sequelize
+//DATABASE CONNECTION VIA SEQUELIZE
 connection.sync().then(function() {
   app.listen(PORT, function() {
     console.log("Listening on:" + PORT)
