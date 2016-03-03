@@ -203,7 +203,7 @@ app.post('/check', passport.authenticate('local', {
 app.get("/", function(req, res){
   Review.findAll().then(function(reviews) {
     console.log(reviews);
-    res.render('test', {
+    res.render('home', {
       msg: req.query.msg,
       user: req.user,
       isAuthenticated: req.isAuthenticated(),
