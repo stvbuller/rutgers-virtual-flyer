@@ -17,7 +17,7 @@
           <li><span class="white-text accent-4">{{#if isAuthenticated}} Hello {{ user.firstname }}
           <li><a href="/logout">Logout</a></li>
           {{/if}}</span></li>
-          {{#if isAuthenticated }} 
+          {{#if isAuthenticated }}
 
           {{ else }}
           <li><a class="waves-effect waves-light btn modal-trigger white" href="#login-modal"><span class="red-text accent-4">Login</span></a></li>
@@ -29,8 +29,18 @@
   </nav>
 
   <main>
-    {{{ body }}}
-  </main>
+  <div class="parallax-container center-align">
+  <h1 class="text-shadow" data-wow-delay="2.5s"><span class="white-text">RU Review</span></h1>
+    <h4 class="text-shadow" data-wow-delay="3.5s"><span class="white-text">Read and Write Reviews of Your Favorite Rutgers Spots</i></h4>
+    <button class="waves-effect waves-light btn modal-trigger white" href="#rate-modal"><i class="fa fa-star red-text accent-4"></i> <span class="red-text accent-4">Rate and Review</span></button>
+    <a class="waves-effect waves-light btn modal-trigger white" href="/reviews"><i class="fa fa-file-text red-text accent-4"></i> <span class="red-text accent-4">Read Reviews</span></a>
+  <div class="parallax"><img src="/images/collegeAve.jpg"></div>
+</div>
+  
+{{{ body }}}
+  
+</main>
+
    <aside>
      <div id="login-modal" class="modal">
       <form id="formLogin" class="col s12" method="POST" action="/check">
