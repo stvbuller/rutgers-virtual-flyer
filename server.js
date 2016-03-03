@@ -200,6 +200,8 @@ app.post('/check', passport.authenticate('local', {
   failureRedirect: '/?msg=Login Credentials do not work'
 }));
 
+//DISPLAY ALL RESTAURANTS WITH REVIEWS :WORKS!
+/*
 app.get("/", function(req, res){
   Review.findAll().then(function(reviews) {
     console.log(reviews);
@@ -211,8 +213,31 @@ app.get("/", function(req, res){
     });
   });
 });
+*/
 
-/*
+//DISPLAY REVIEWS BY ID: IF LOGGED IN, JUST YOUR ID. IF NOT ALL REVIEWS
+app.get("/", function(req, res){
+  console.log('user is', req.user);
+  var where = {};
+  if(req.user) {
+    where = {
+      where: {
+        userId: req.user.id
+      }
+    }
+  }
+  console.log("Where is", where);
+  Review.findAll(where).then(function(reviews) {
+    console.log(reviews);
+    res.render('test', {
+      msg: req.query.msg,
+      user: req.user,
+      isAuthenticated: req.isAuthenticated(),
+      reviews: reviews //left side = handlebars right side = data variable
+    });
+  });
+});
+
 app.get("/test", function(req, res) {
   Review.findAll().then(function(reviews) {
     console.log(reviews);
@@ -224,7 +249,7 @@ app.get("/test", function(req, res) {
     });
   });
 });
-*/
+
 /*
 //TEST : DISPLAYS DATA FROM DATABASE
 app.get('/test', function(req, res) {
@@ -236,18 +261,6 @@ app.get('/test', function(req, res) {
   });
 });
 */
-
-/*IN PROGRESS -- DISPLAY REVIEWS BASED ON USER ID FOR UPDATING */
-app.get("/userPage", function(req, res){
-  Review.findAll({
-    where:{
-      userId:'req.reviews.userId' //this doesn't work
-    }
-  }).then(function (reviews) {
-      console.log(reviews);
-      res.render('test', {reviews: reviews});
-    });
-});
 
 /*IN PROGRESS -- DISPLAY ALL REVIEWS FOR PARTICULAR RESTAURANT*/
 app.get('/info/:name', function(req, res){
