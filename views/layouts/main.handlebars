@@ -21,14 +21,18 @@
       <div class="nav-wrapper red accent-4">
         <div class="container">
           <a href="/" class="brand-logo text-shadow">RU Review</a>
+          <a id="welcome-username" href="/yourReviews">{{#if isAuthenticated}} Hello {{ user.firstname }}</a>
           <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><span class="white-text accent-4 center-align">{{#if isAuthenticated}} Hello {{ user.firstname }}</span></li>
-            <li><a href="/yourReviews" class="waves-effect waves-light btn modal-trigger white"><span class="red-text accent-4">Your Reviews</span></a></li>
-            <li><a href="/logout" class="waves-effect waves-light btn modal-trigger white"><span class="red-text accent-4">Logout</span></a></li>
-            {{/if}}
-            {{#if isAuthenticated }}
+            <li><a href="/" class="waves-effect waves-light">Home</a></li>
+            <li><a href="#latestreviews" class="waves-effect waves-light">Latest Reviews</a></li>
+            <li><a href="/yourReviews" class="waves-effect waves-light">Your Reviews</a></li>
+            <li><a href="/logout" class="waves-effect waves-light">Logout</a></li>
+          </ul>
+          {{/if}}
+          {{#if isAuthenticated }}
 
-            {{ else }}
+          {{ else }}
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li><a class="waves-effect waves-light btn modal-trigger white" href="#login-modal"><span class="red-text accent-4">Login</span></a></li>
             <li><a class="waves-effect waves-light btn modal-trigger white" href="#signup-modal"><span class="red-text accent-4">Signup</span></a></li>
             {{/if}}
@@ -171,12 +175,8 @@
     </div>
    </aside>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
-  <!-- plugin for jQuery form validation -->
-  <script src="https://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.min.js"></script>
-  <!-- js file for form validation -->
-  <script type="text/javascript" src="js/formValidate.js"></script>
   <!-- Custom Scripts -->
   <script type="text/javascript" src="js/scripts.js"></script>
 </body>

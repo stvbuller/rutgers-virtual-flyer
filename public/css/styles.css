@@ -1,10 +1,5 @@
 /* Styles for Rutgers Virtual Flyer */
 
-body { 
-  margin:0; 
-  padding:0;
-}
-
 .parallax-title-container {
   position: relative;
   overflow: hidden;
@@ -21,4 +16,16 @@ body {
 
 blockquote {
   border-left: 5px solid red;
+}
+
+#welcome-username {
+  position: absolute;
+  color: #fff;
+  display: inline-block;
+  font-size: 1.5rem;
+  padding: 0;
+  white-space: nowrap;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
 }
