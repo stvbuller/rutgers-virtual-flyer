@@ -10,6 +10,8 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
   <!-- Materialize Icons -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Animations by Dan Eden -->
+  <link rel="stylesheet" type="text/css" href="css/animate.css">
   <!-- Custom Styles -->
   <link rel="stylesheet" type="text/css" href="css/styles.css">
   <!-- Favicon -->
@@ -20,22 +22,41 @@
     <nav>
       <div class="nav-wrapper red accent-4">
         <div class="container">
-          <a href="/" class="brand-logo text-shadow">RU Review</a>
+          <a href="/" class="brand-logo text-shadow hide-on-med-and-down">RU Review</a>
           <a id="welcome-username" href="/yourReviews">{{#if isAuthenticated}} Hello {{ user.firstname }}</a>
-          <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <!-- desktop nav -->
+          <ul class="right hide-on-med-and-down">
             <li><a href="/" class="waves-effect waves-light">Home</a></li>
             <li><a href="/yourReviews" class="waves-effect waves-light">Your Reviews</a></li>
-            <li><a href="/logout" class="waves-effect waves-light">Logout</a></li>
+            <li><a href="/logout" class="waves-effect waves-light">Log Out</a></li>
           </ul>
           {{/if}}
           {{#if isAuthenticated }}
 
           {{ else }}
-          <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a class="waves-effect waves-light btn modal-trigger white" href="#login-modal"><span class="red-text accent-4">Login</span></a></li>
-            <li><a class="waves-effect waves-light btn modal-trigger white" href="#signup-modal"><span class="red-text accent-4">Signup</span></a></li>
+          <ul class="right hide-on-med-and-down">
+            <li><a class="waves-effect waves-light btn modal-trigger white" href="#login-modal"><span class="red-text accent-4">Log In</span></a></li>
+            <li><a class="waves-effect waves-light btn modal-trigger white" href="#signup-modal"><span class="red-text accent-4">Sign Up</span></a></li>
             {{/if}}
           </ul>
+          <!-- mobile nav -->
+          <!-- mobile nav menu icon -->
+          <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+          {{#if isAuthenticated}}
+          <ul id="mobile-demo" class="side-nav">
+            <li><a href="/" class="waves-effect waves-light">Home</a></li>
+            <li><a href="/yourReviews" class="waves-effect waves-light">Your Reviews</a></li>
+            <li><a href="/logout" class="waves-effect waves-light">Log Out</a></li>
+          </ul>
+          {{/if}}
+          {{#if isAuthenticated }}
+
+          {{ else }}
+          <ul id="mobile-demo" class="side-nav">
+            <li><a href="#login-modal" class="waves-effect waves-light modal-trigger">Log In</a></li>
+            <li><a href="#signup-modal" class="waves-effect waves-light modal-trigger">Sign Up</a></li>
+          </ul>
+          {{/if}}
         </div>
       </div>
     </nav>
