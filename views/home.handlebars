@@ -1,24 +1,37 @@
-<div class="section white">
-  <div class="row container">
-    <div id="latestreviews" class="col s12 scrollspy">
-    <h3>Latest Reviews</h3>
-      <div class="row">
-        {{#each reviews}}
-          <div class="row">
-            <div class="col-md-12">
-              <ul class="collection">
-                <li class="collection-item">
-                  <h4>{{locationName}}</h4>
-                  <b>{{city}}</b><br />
-                  {{rating}} star rating<br />
-                  <span id="star-rating">{{rating}}</span>
-                  <blockquote>{{review}}</blockquote>
-             
-                </li>
-              </ul>
+<div class="parallax-title-container center-align">
+  <h1 class="text-shadow" data-wow-delay="2.5s"><span class="white-text">RU Review</span></h1>
+  <h4 class="text-shadow" data-wow-delay="3.5s"><span class="white-text">Read and Write Reviews of Your Favorite Rutgers Spots</i></h4>
+  <a href="#latestreviews" class="waves-effect waves-light btn white"><span class="red-text accent-4"><i class="fa fa-file-text red-text accent-4"></i> Latest Reviews</span></a>
+  {{#if isAuthenticated}}
+    <button class="waves-effect waves-light btn modal-trigger white" href="#rate-modal"><i class="fa fa-star red-text accent-4"></i> <span class="red-text accent-4">Rate and Review</span></button>
+  {{/if}}
+  <div class="parallax">
+    <img src="images/coffeemugs.jpg">
+  </div>
+</div>
+<div class="container">
+  <div class="section white">
+    <div class="row container">
+      <div class="col s12">
+      <h3 id="latestreviews" class="scrollspy">Latest Reviews</h3>
+        <div class="row">
+          {{#each reviews}}
+            <div class="row">
+              <div class="col-md-12">
+                <ul class="collection">
+                  <li class="collection-item">
+                    <h4>{{locationName}}</h4>
+                    <b>{{city}}</b><br />
+                    {{rating}} star rating<br />
+                    <span id="star-rating">{{rating}}</span>
+                    <blockquote>{{review}}</blockquote>
+               
+                  </li>
+                </ul>
+              </div>
             </div>
-          </div>
-        {{/each}}
+          {{/each}}
+        </div>
       </div>
     </div>
   </div>
