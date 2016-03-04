@@ -1,9 +1,6 @@
 // Scripts for Rutgers Virtual Flyer
 $(document).ready(function() {
 
-  // Triggers modal launch
-  $('.modal-trigger').leanModal();
-
   // Materialize parallax
   $('.parallax').parallax();
 
@@ -13,6 +10,9 @@ $(document).ready(function() {
   // For dropdown menu
   $('select').material_select();
 
+  // Triggers modal launch
+  $('.modal-trigger').leanModal();
+  
   $('.deleteBtn').on('click', function(e) {
     e.preventDefault();
     var id = $(this).data('id');
