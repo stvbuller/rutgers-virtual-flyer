@@ -188,6 +188,7 @@ Review.bulkCreate([
 
 
 User.hasMany(Review);
+Review.belongsTo(User);
 
 //handlebars setup
 var expressHandlebars = require('express-handlebars');
@@ -214,7 +215,9 @@ app.post('/check', passport.authenticate('local', {
 
 //GET ALL REVIEWS
 app.get("/", function(req, res){
-  Review.findAll({order: "createdAt DESC"}).then(function(reviews) {
+  Review.findAll({order: "createdAt DESC",
+  include: [User]
+  }).then(function(reviews) {
     //console.log(reviews);
     res.render('home', {
       msg: req.query.msg,

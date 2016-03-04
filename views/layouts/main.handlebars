@@ -155,10 +155,32 @@
             </div> -->
           </div>
           <div class="row">
+
+            <!-- can't get radio buttons to work -->
+            <!-- <div class="input-field col s12">
+              <label>City</label>
+              <p>
+                <input name="city" type="radio" id="newbrunswick" value="New Brunswick" class="with-gap" />
+                <label for="city">New Brunswick</label>
+                <input name="city" type="radio" id="piscataway" value="Piscataway" class="with-gap" />
+                <label for="city">Piscataway</label>
+              </p>
+            </div>  -->
+
+            <!-- using dropdown until we can get radio buttons to work -->
             <div class="input-field col s12">
-              <input id="city" type="text" name="city">
+              <select id="city" type="text" name="city">
+                <option value="" disabled selected>Choose</option>
+                <option value="New Brunswick">New Brunswick</option>
+                <option value="Piscataway">Piscataway</option>
+              </select>
               <label for="city">City</label>
             </div>
+
+            <!-- <div class="input-field col s12">
+              <input id="city" type="text" name="city">
+              <label for="city">City</label>
+            </div> -->
           </div>
           <div class="row">
             <div class="input-field col s12">
