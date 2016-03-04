@@ -212,19 +212,20 @@ app.post('/check', passport.authenticate('local', {
   failureRedirect: '/?msg=Login Credentials do not work'
 }));
 
-//GET ALL REVIEWS. IF AUTHENTICATED ALLOW EDITING (SHOWS BUTTONS)
+//GET ALL REVIEWS
 app.get("/", function(req, res){
   Review.findAll().then(function(reviews) {
     //console.log(reviews);
     res.render('home', {
       msg: req.query.msg,
       user: req.user,
+      isAuthenticated: req.isAuthenticated(),
       reviews: reviews //left side = handlebars right side = data variable
     });
   });
 });
 
-//GET ALL REVIEWS CREATED BY USERID
+//GET ALL REVIEWS CONNECTED TO USER IF AUTHENTICATED ALLOW EDITING (SHOWS BUTTONS)
 app.get("/yourReviews", function(req, res){
   console.log('user is', req.user);
   var where = {};
@@ -238,7 +239,7 @@ app.get("/yourReviews", function(req, res){
   console.log("Where is", where);
   Review.findAll(where).then(function(reviews) {
     console.log(reviews);
-    res.render('home', {
+    res.render('yourReviews', {
       msg: req.query.msg,
       user: req.user,
       isAuthenticated: req.isAuthenticated(),
@@ -246,6 +247,7 @@ app.get("/yourReviews", function(req, res){
     });
   });
 });
+
 
 //GET REVIEWS USING FILTRATION. NEED TO CHANGE THIS TO DININGTYPE AFTER DB CORRECTION
 app.get('/filter/:city', function(req, res){
