@@ -22,9 +22,10 @@
         <div class="container">
           <a href="/" class="brand-logo text-shadow">RU Review</a>
           <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><span class="white-text accent-4">{{#if isAuthenticated}} Hello {{ user.firstname }}
+            <li><span class="white-text accent-4 center-align">{{#if isAuthenticated}} Hello {{ user.firstname }}</span></li>
+            <li><a href="/yourReviews" class="waves-effect waves-light btn modal-trigger white"><span class="red-text accent-4">Your Reviews</span></a></li>
             <li><a href="/logout" class="waves-effect waves-light btn modal-trigger white"><span class="red-text accent-4">Logout</span></a></li>
-            {{/if}}</span></li>
+            {{/if}}
             {{#if isAuthenticated }}
 
             {{ else }}
