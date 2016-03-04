@@ -214,13 +214,13 @@ app.post('/check', passport.authenticate('local', {
 
 //GET ALL REVIEWS
 app.get("/", function(req, res){
-  Review.findAll().then(function(reviews) {
+  Review.findAll({order: "createdAt DESC"}).then(function(reviews) {
     //console.log(reviews);
     res.render('home', {
       msg: req.query.msg,
       user: req.user,
       isAuthenticated: req.isAuthenticated(),
-      reviews: reviews //left side = handlebars right side = data variable
+      reviews: reviews, //left side = handlebars right side = data variable
     });
   });
 });
@@ -327,10 +327,10 @@ app.get("/deleteReview:id", function(req, res) {
     {
       where: {id: reviewId}
     }).then(function(result) {
-    res.redirect('/?msg=Review deleted.');
+    res.redirect('/yourReviews?msg=Review deleted.');
     }).catch(function(err) {
       console.log(err);
-      res.redirect('/?msg=' + err.message);
+      res.redirect('/yourReviews?msg=' + err.message);
     });
 });
 
