@@ -28,6 +28,8 @@ $(document).ready(function() {
 
   // Star Rating
   function starRating(ratingFromDb){
+    ratingFromDb = user.ratingFromDb;
+    console.log(ratingFromDb);
     if(ratingFromDb === 1) {
       $('#star-rating').append('<i class="fa fa-star"></i>');
     }
