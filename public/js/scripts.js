@@ -15,6 +15,9 @@ $(document).ready(function() {
 
   // Activate side-nav for mobile
   $(".button-collapse").sideNav();
+
+  // For messages to appear on page from req.query.msg
+  $('.tooltipped').tooltip({delay: 50});
   
   $('.deleteBtn').on('click', function(e) {
     e.preventDefault();
@@ -28,6 +31,13 @@ $(document).ready(function() {
       }
     })
   })
+
+  // Toast msg for saving a review
+  var toastContent = $("Review saved!");
+  $('#save-rating-btn').on('click', function() {
+    console.log($toastContent);
+    Materialize.toast(toastContent, 5000);
+  });
 
   // Star Rating
   function starRating(ratingFromDb){
