@@ -12,6 +12,9 @@ $(document).ready(function() {
 
   // For dropdown menu
   $('select').material_select();
+
+  // Activate side-nav for mobile
+  $(".button-collapse").sideNav();
   
   $('.deleteBtn').on('click', function(e) {
     e.preventDefault();
