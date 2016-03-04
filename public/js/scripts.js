@@ -4,11 +4,27 @@ $(document).ready(function() {
   // Triggers modal launch
   $('.modal-trigger').leanModal();
 
-  //materialize parallax
+  // Materialize parallax
   $('.parallax').parallax();
 
-  //for dropdown menu
+  // For dropdown menu
   $('select').material_select();
+
+  // To scroll directly to latest reviews
+  $('.scrollspy').scrollSpy();
+
+  $('.deleteBtn').on('click', function(e) {
+    e.preventDefault();
+    var id = $(this).data('id');
+    var that = $(this);
+    $.ajax({
+      url: '/deleteReview/' + id,
+      type: 'DELETE',
+      success: function(result) {
+        that.parent(".review").fadeOut();
+      }
+    })
+  })
 
    //blank map
     //button to find your current location

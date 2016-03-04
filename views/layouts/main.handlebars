@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title></title>
+  <title>RU Review</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
   <link href='https://api.mapbox.com/mapbox.js/v2.3.0/mapbox.css' rel='stylesheet' />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -9,32 +9,36 @@
   <link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
 <body>
-  <nav>
-    <div class="nav-wrapper red accent-4">
-      <div class="container">
-        <a href="/" class="brand-logo">RU Review</a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-          <li><span class="white-text accent-4">{{#if isAuthenticated}} Hello {{ user.firstname }}
-          <li><a href="/logout" class="waves-effect waves-light btn modal-trigger white"><span class="red-text accent-4">Logout</span></a></li>
-          {{/if}}</span></li>
-          {{#if isAuthenticated }}
+  <div class="navbar-fixed">
+    <nav>
+      <div class="nav-wrapper red accent-4">
+        <div class="container">
+          <a href="/" class="brand-logo">RU Review</a>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><span class="white-text accent-4">{{#if isAuthenticated}} Hello {{ user.firstname }}
+            <li><a href="/logout" class="waves-effect waves-light btn modal-trigger white"><span class="red-text accent-4">Logout</span></a></li>
+            {{/if}}</span></li>
+            {{#if isAuthenticated }}
 
-          {{ else }}
-          <li><a class="waves-effect waves-light btn modal-trigger white" href="#login-modal"><span class="red-text accent-4">Login</span></a></li>
-          <li><a class="waves-effect waves-light btn modal-trigger white" href="#signup-modal"><span class="red-text accent-4">Signup</span></a></li>
-          {{/if}}
-        </ul>
+            {{ else }}
+            <li><a class="waves-effect waves-light btn modal-trigger white" href="#login-modal"><span class="red-text accent-4">Login</span></a></li>
+            <li><a class="waves-effect waves-light btn modal-trigger white" href="#signup-modal"><span class="red-text accent-4">Signup</span></a></li>
+            {{/if}}
+          </ul>
+        </div>
       </div>
-    </div>
-  </nav>
+    </nav>
+  </div>
 
   <main>
 
     <div class="parallax-container center-align">
       <h1 class="text-shadow" data-wow-delay="2.5s"><span class="white-text">RU Review</span></h1>
       <h4 class="text-shadow" data-wow-delay="3.5s"><span class="white-text">Read and Write Reviews of Your Favorite Rutgers Spots</i></h4>
-      <button class="waves-effect waves-light btn modal-trigger white" href="#rate-modal"><i class="fa fa-star red-text accent-4"></i> <span class="red-text accent-4">Rate and Review</span></button>
-      <!-- <a class="waves-effect waves-light btn modal-trigger white" href="/reviews"><i class="fa fa-file-text red-text accent-4"></i> <span class="red-text accent-4">Read Reviews</span></a> -->
+      {{#if isAuthenticated}}
+        <button class="waves-effect waves-light btn modal-trigger white" href="#rate-modal"><i class="fa fa-star red-text accent-4"></i> <span class="red-text accent-4">Rate and Review</span></button>
+      {{/if}}
+      <a class="waves-effect waves-light btn white" href="#latestreviews"><span class="red-text accent-4">Latest Reviews</span></a>
       <div class="parallax">
         <img src="images/coffeemugs.jpg">
       </div>
