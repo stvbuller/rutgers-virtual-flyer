@@ -327,10 +327,10 @@ app.get("/deleteReview:id", function(req, res) {
     {
       where: {id: reviewId}
     }).then(function(result) {
-    res.redirect('/?msg=Review deleted.');
+    res.redirect('/yourReviews?msg=Review deleted.');
     }).catch(function(err) {
       console.log(err);
-      res.redirect('/?msg=' + err.message);
+      res.redirect('/yourReviews?msg=' + err.message);
     });
 });
 
