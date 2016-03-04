@@ -29,3 +29,8 @@ blockquote {
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
 }
+
+#search-form {
+  background-color: white;
+  opacity: 0.6;
+}
