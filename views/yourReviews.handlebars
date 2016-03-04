@@ -1,0 +1,61 @@
+<div class="section white">
+  <div class="row container">
+    <div class="col s12">
+    <h3>Latest Reviews</h3>
+      <div class="row">
+        {{#each reviews}}
+          <div class="row">
+            <div class="col-md-12">
+              <ul class="collection">
+                <li class="collection-item">
+                  <h4>{{locationName}}</h4>
+                  <b>{{city}}</b><br />
+                  {{rating}} star rating<br />
+                  <blockquote>{{review}}</blockquote>
+                  <div class="right-align">
+                    {{#if ../isAuthenticated}}<a href="/edit{{id}}" class="waves-effect waves-light btn modal-trigger white"><span class="red-text accent-4"><i class="fa fa-pencil"></i></span></a>
+                    <a href="/deleteReview{{id}}" class="waves-effect waves-light btn modal-trigger white"><span class="red-text accent-4"><i class="fa fa-trash deleteBtn" data-id="{{id}}"></i></span></a>
+                    {{/if}}
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+    </div> <!-- end col s12 -->
+
+
+
+    <!--  <div class="col s12 m6" id="test">
+      <div id="filter">
+        <form action="#">
+
+          <p>
+            <input type="checkbox" id="dining" checked="checked"  />
+            <label for="dining">Dining</label>
+          </p>
+
+          <p>
+            <input type="checkbox" id="ru_sports" />
+            <label for="ru_sports">RU Sports</label>
+          </p>
+
+          <p>
+            <input type="checkbox" id="campus_events" />
+            <label for="campus_events">On-Campus Events</label>
+          </p>
+
+          <p>
+            <input type="checkbox" id="recreation" />
+            <label for="recreation">Things-to-do</label>
+          </p>
+        </form>
+      </div>
+    </div>
+    <div class="parallax-container">
+     <div id='map'></div>
+    </div> -->
+
+  </div>
+</div>
