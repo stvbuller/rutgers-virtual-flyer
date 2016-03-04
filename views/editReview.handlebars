@@ -12,7 +12,7 @@
                   <h4>{{locationName}}</h4>
                   <b>{{city}}</b><br />
                   {{rating}} star rating<br />
-                  <form action="/updateReview{{id}}" method="post">
+                  <form action="/updateReview/{{id}}" method="post">
                     <label for="rating">Star Rating</label>
                     <textarea name="rating" rows="2" cols="30">{{rating}}</textarea>
                     <label for="review">Review</label>
