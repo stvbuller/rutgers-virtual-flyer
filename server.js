@@ -278,7 +278,7 @@ app.post("/saveRating", function(req, res) {
 });
 
 //GETS REVIEWS FROM REVIEW TABLE BY ID SENDS TO EDITREVIEW FOR EDITING
-app.get("/edit:id", function(req, res) {
+app.get("/edit/:id", function(req, res) {
   //console.log("params id " + req.params.id);
   var reviewId = req.params.id;
   Review.findAll({
@@ -297,7 +297,7 @@ app.get("/edit:id", function(req, res) {
 });
 
 //POSTS UPDATED REVIEW TO TABLE AND REDIRECTS TO INDEX
-app.post("/updateReview:id", function(req, res) {
+app.post("/updateReview/:id", function(req, res) {
   var newReview = req.body.review;
   var newRating = req.body.rating;
   var reviewId = req.params.id;
@@ -320,7 +320,7 @@ app.post("/updateReview:id", function(req, res) {
 });
 
 //GETS REVIEW BY REVIEWID AND DELETES IT
-app.get("/deleteReview:id", function(req, res) {
+app.get("/deleteReview/:id", function(req, res) {
   var reviewId = req.params.id;
   console.log(reviewId);
   Review.destroy(
