@@ -219,6 +219,28 @@ app.get("/", function(req, res){
     res.render('home', {
       msg: req.query.msg,
       user: req.user,
+      reviews: reviews //left side = handlebars right side = data variable
+    });
+  });
+});
+
+//GET ALL REVIEWS CREATED BY USERID
+app.get("/yourReviews", function(req, res){
+  console.log('user is', req.user);
+  var where = {};
+  if(req.user) {
+    where = {
+      where: {
+        userId: req.user.id
+      }
+    }
+  }
+  console.log("Where is", where);
+  Review.findAll(where).then(function(reviews) {
+    console.log(reviews);
+    res.render('home', {
+      msg: req.query.msg,
+      user: req.user,
       isAuthenticated: req.isAuthenticated(),
       reviews: reviews //left side = handlebars right side = data variable
     });
