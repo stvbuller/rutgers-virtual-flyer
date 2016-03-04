@@ -253,11 +253,11 @@ app.get("/yourReviews", function(req, res){
 
 
 //GET REVIEWS USING FILTRATION. NEED TO CHANGE THIS TO DININGTYPE AFTER DB CORRECTION
-app.get('/filter/:city', function(req, res){
-  var city = req.params.city;
+app.get("/filter/:diningType", function(req, res){
+  var diningType = req.params.diningType;
   Review.findAll({
     where: {
-      city : city
+      diningType : diningType
     }
   }).then(function(reviews){
     console.log(reviews);
@@ -352,7 +352,6 @@ app.post("/search", function(req,res) {
     });
   });
 });
-
 
 //LOGOUT USER
 app.get('/logout', function(req, res){
