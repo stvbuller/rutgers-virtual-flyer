@@ -7,11 +7,11 @@ $(document).ready(function() {
   // Materialize parallax
   $('.parallax').parallax();
 
-  // For dropdown menu
-  $('select').material_select();
-
   // To scroll directly to latest reviews
   $('.scrollspy').scrollSpy();
+
+  // For dropdown menu
+  $('select').material_select();
 
   $('.deleteBtn').on('click', function(e) {
     e.preventDefault();
