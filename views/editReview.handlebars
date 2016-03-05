@@ -1,28 +1,38 @@
 
+  <!-- Animations by Dan Eden -->
+  <link rel="stylesheet" type="text/css" href="../css/animate.css">
+  <!-- Custom Styles -->
+  <link rel="stylesheet" type="text/css" href="../css/styles.css">
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico">
+  <!-- Custom Scripts -->
+  <script type="text/javascript" src="../js/scripts.js"></script>
+
+
 <div class="section white">
   <div class="row container">
     <div class="col s12">
-    <h3>Update the Review</h3>
-      <div class="row">
+    <h3>Update Your Review</h3>
         {{#each reviews}}
           <div class="row">
-            <div class="col-md-12">
+            <div class="col s12">
               <ul class="collection">
                 <li class="collection-item">
                   <h4>{{locationName}}</h4>
                   <b>{{city}}</b><br />
-                  {{rating}} star rating<br />
                   <form action="/updateReview/{{id}}" method="post">
-                    <label for="rating">Star Rating</label>
-                    <textarea id="rating" class="materialize-textarea" name="rating">{{rating}}</textarea>
+                    <label for="rating" class="active">Star Rating</label>
+                    <textarea id="rating" class="materialize-textarea" name="rating" class="validate">{{rating}}</textarea>
                     <label for="textarea1">Review</label>
-                    <textarea id="textarea1" class="materialize-textarea" name="review">{{review}}</textarea>
-                    <button type="submit" class="btn waves-effect waves-white btn-flat">Update Review</button>
+                    <textarea id="review" class="materialize-textarea validate" type="text" name="review">{{review}}</textarea>
+                    <button type="submit" class="btn modal-action modal-close waves-effect waves-white btn-flat" onclick="Materialize.toast('Review updated', 4000)">Update Review</button>
+                  </div>
                   </form>
                 </li>
               </ul>
             </div>
           </div>
         {{/each}}
-      </div>
     </div> <!-- end col s12 -->
+  </div>
+</div>
