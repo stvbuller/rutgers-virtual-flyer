@@ -261,7 +261,16 @@ app.get("/filter/:diningType", function(req, res){
   Review.findAll({
     where: {
       diningType : diningType
-    }
+    },
+    include: [User]
+  }).then(function(reviews) {
+    //console.log(reviews);
+    res.render('home', {
+      msg: req.query.msg,
+      user: req.user,
+      isAuthenticated: req.isAuthenticated(),
+      reviews: reviews, //left side = handlebars right side = data variable
+    });
   }).then(function(reviews){
     console.log(reviews);
     res.render("home", {
