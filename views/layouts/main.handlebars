@@ -130,45 +130,26 @@
 
    <aside>
      <div id="rate-modal" class="modal">
-      <form class="col s12" id="formSignup" method="POST" action="/saveRating">
+      <form class="col s6" id="formSignup" method="POST" action="/saveRating">
         <div class="modal-content">
           <h3>Review</h3>
           <div class="row">
-            <div class="input-field col s12">
+            <div class="input-field col s6">
               <input id="location-name" type="text" class="validate" name="locationName">
               <label for="location-name">Location Name</label>
             </div>
-
-            <!-- <div class="input-field col s6">
-              <label for="dining-type">Dining Type</label>
-              <br />
-              <p id="dining-type" type="text" class="validate" name="diningType">
-                  <input class="with-gap" name="diningType" type="radio" id="test1" />
-                  <label for="test1">Restaurant</label>
-
-                  <input class="with-gap" name="diningType" type="radio" id="test2" />
-                  <label for="test2">Cafe</label>
-
-                  <input class="with-gap" name="diningType" type="radio" id="test3"  />
-                  <label for="test3">Bar</label>
-              </p>
-            </div> -->
+            <div class="input-field col s6">
+              <select id="diningType" type="text" name="diningType">
+                <option value="" disabled selected>Choose</option>
+                <option value="Restaurant">Restaurant</option>
+                <option value="Cafe">Cafe</option>
+                <option value="Bar">Bar</option>
+              </select>
+              <label for="city">Dining Type</label>
+            </div>
           </div>
           <div class="row">
-
-            <!-- can't get radio buttons to work -->
-            <!-- <div class="input-field col s12">
-              <label>City</label>
-              <p>
-                <input name="city" type="radio" id="newbrunswick" value="New Brunswick" class="with-gap" />
-                <label for="city">New Brunswick</label>
-                <input name="city" type="radio" id="piscataway" value="Piscataway" class="with-gap" />
-                <label for="city">Piscataway</label>
-              </p>
-            </div>  -->
-
-            <!-- using dropdown until we can get radio buttons to work -->
-            <div class="input-field col s12">
+            <div class="input-field col s6">
               <select id="city" type="text" name="city">
                 <option value="" disabled selected>Choose</option>
                 <option value="New Brunswick">New Brunswick</option>
@@ -176,15 +157,15 @@
               </select>
               <label for="city">City</label>
             </div>
-
-            <!-- <div class="input-field col s12">
-              <input id="city" type="text" name="city">
-              <label for="city">City</label>
-            </div> -->
-          </div>
-          <div class="row">
-            <div class="input-field col s12">
-              <input id="rating" type="text" class="validate" name="rating">
+            <div class="input-field col s6">
+              <select id="rating" type="text" name="rating">
+                <option value="" disabled selected>Choose</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="4">5</option>
+              </select>
               <label for="rating">Star Rating</label>
             </div>
           </div>
@@ -196,8 +177,8 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn modal-action modal-close waves-effect waves-white btn-flat">Cancel</button>
-          <button type="submit" class="btn modal-action modal-close waves-effect waves-white btn-flat">Submit</button>
+          <button type="button" class="waves-effect waves-light btn red modal-action modal-close">Cancel</button> 
+          <button type="submit" class="waves-effect waves-light btn red modal-action modal-close">Submit</button>
         </div>
       </form>
     </div>
