@@ -15,7 +15,7 @@
                   <blockquote>{{review}}</blockquote>
                   <div class="right-align">
                     {{#if ../isAuthenticated}}<a href="/edit/{{id}}" class="waves-effect waves-light btn modal-trigger white"><span class="red-text accent-4"><i class="fa fa-pencil"></i></span></a>
-                    <a href="/deleteReview/{{id}}" class="waves-effect waves-light btn modal-trigger white" onclick="Materialize.toast('Review deleted', 4000)"><span class="red-text accent-4"><i class="fa fa-trash deleteBtn" data-id="{{id}}"></i></span></a>
+                    <a href="/deleteReview/{{id}}" class="deleteBtn waves-effect waves-light btn modal-trigger white" data-id="{{id}}" onclick="Materialize.toast('Review deleted', 4000)"><span class="red-text accent-4"><i class="fa fa-trash"></i></span></a>
                     {{/if}}
                   </div>
                 </li>
