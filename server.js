@@ -345,7 +345,7 @@ app.post("/search", function(req,res) {
   Review.findAll({
     where: {
       locationName: searchQuery
-    }
+    }, include: [User]
   }).then(function(reviews){
     res.render("home", {
       reviews: reviews
