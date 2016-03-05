@@ -315,7 +315,7 @@ app.post("/updateReview/:id", function(req, res) {
   {
     where: {id: reviewId}
   }).then(function(result) {
-  res.redirect('/?msg=Review updated.');
+  res.redirect('/yourReviews?msg=Review updated.');
   }).catch(function(err) {
     console.log(err);
     res.redirect('/?msg=' + err.message);

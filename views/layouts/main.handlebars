@@ -86,7 +86,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn modal-action modal-close waves-effect waves-white btn-flat">Cancel</button>
-          <button type="submit" class="btn modal-action modal-close waves-effect waves-white btn-flat">Submit</button>
+          <button type="submit" class="btn modal-action modal-close waves-effect waves-white btn-flat" onclick="Materialize.toast('You are logged in', 4000)">Submit</button>
         </div>
       </form>
     </div>
@@ -122,7 +122,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn modal-action modal-close waves-effect waves-white btn-flat">Cancel</button>
-          <button type="submit" class="btn modal-action modal-close waves-effect waves-white btn-flat">Submit</button>
+          <button type="submit" class="btn modal-action modal-close waves-effect waves-white btn-flat" onclick="Materialize.toast('Account created', 4000)">Submit</button>
         </div>
       </form>
     </div>
@@ -130,7 +130,7 @@
 
    <aside>
      <div id="rate-modal" class="modal">
-      <form class="col s6" id="formSignup" method="POST" action="/saveRating">
+      <form class="col s6" id="formRate" method="POST" action="/saveRating">
         <div class="modal-content">
           <h3>Review</h3>
           <div class="row">
@@ -171,14 +171,14 @@
           </div>
           <div class="row">
             <div class="input-field col s12">
-              <input id="review" type="text" class="validate" name="review">
+              <textarea id="review" class="materialize-textarea validate" type="text" name="review"></textarea>
               <label for="review">Review</label>
             </div>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="waves-effect waves-light btn red modal-action modal-close">Cancel</button> 
-          <button type="submit" class="waves-effect waves-light btn red modal-action modal-close">Submit</button>
+          <button type="button" class="btn modal-action modal-close waves-effect waves-white btn-flat">Cancel</button> 
+          <button type="submit" class="btn modal-action modal-close waves-effect waves-white btn-flat">Submit</button>
         </div>
       </form>
     </div>
