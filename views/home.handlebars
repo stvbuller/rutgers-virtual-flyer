@@ -7,9 +7,9 @@
   {{/if}}
   <div class="row">
     <div class="col s4 offset-s4">
-      <form id="search-form" class="hide-on-med-and-down">
+      <form id="search-form" class="hide-on-med-and-down" method="post" action="/search">
         <div class="input-field">
-          <input id="search" type="search" placeholder="Search" autofocus>
+          <input id="search" name="searchQuery" type="search" placeholder="Search" autofocus>
         </div>
       </form>
     </div>
@@ -47,7 +47,7 @@
                     {{rating}} star rating<br />
                     <span id="star-rating">{{rating}}</span>
                     <blockquote>{{review}}</blockquote>
-                    <p> by {{user.firstname}} {{user.lastname}}</p>
+                    <p> by {{user.firstname}}</p>
                   </li>
                 </ul>
               </div>
