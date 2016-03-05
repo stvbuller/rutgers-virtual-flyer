@@ -32,23 +32,5 @@ $(document).ready(function() {
     })
   })
 
-  // Toast msg for saving a review
-  var toastContent = $("Review saved!");
-  $('#save-rating-btn').on('click', function() {
-    console.log($toastContent);
-    Materialize.toast(toastContent, 5000);
-  });
-
-  // Star Rating
-  function starRating(ratingFromDb){
-    ratingFromDb = user.ratingFromDb;
-    console.log(ratingFromDb);
-    if(ratingFromDb === 1) {
-      $('#star-rating').append('<i class="fa fa-star"></i>');
-    }
-  };
-
-  starRating();
-
 }); //end of doc.ready
 
