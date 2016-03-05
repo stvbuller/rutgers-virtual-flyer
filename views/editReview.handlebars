@@ -14,9 +14,9 @@
                   {{rating}} star rating<br />
                   <form action="/updateReview/{{id}}" method="post">
                     <label for="rating">Star Rating</label>
-                    <textarea name="rating" rows="2" cols="30">{{rating}}</textarea>
-                    <label for="review">Review</label>
-                    <textarea name="review" rows="2" cols="30">{{review}}</textarea>
+                    <textarea id="rating" class="materialize-textarea" name="rating">{{rating}}</textarea>
+                    <label for="textarea1">Review</label>
+                    <textarea id="textarea1" class="materialize-textarea" name="review">{{review}}</textarea>
                     <button type="submit" class="btn waves-effect waves-white btn-flat">Update Review</button>
                   </form>
                 </li>
