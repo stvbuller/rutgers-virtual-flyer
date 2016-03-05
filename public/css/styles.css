@@ -38,3 +38,7 @@ blockquote {
   background-color: white;
   opacity: 0.6;
 }
+
+.social-icon {
+  margin-right: 5px;
+}
