@@ -337,6 +337,23 @@ app.get("/deleteReview/:id", function(req, res) {
     });
 });
 
+//GET REVIEWS FROM REVIEW TABLE BY TEXT SEARCH
+app.post("/search", function(req,res) {
+  var searchQuery = req.body.searchQuery; //searchQuest is from form.
+  console.log(searchQuery); //returning correctly.
+
+  Review.findAll({
+    where: {
+      locationName: searchQuery
+    }
+  }).then(function(reviews){
+    res.render("home", {
+      reviews: reviews
+    });
+  });
+});
+
+
 //LOGOUT USER
 app.get('/logout', function(req, res){
   req.logout();
