@@ -238,17 +238,19 @@ app.get("/yourReviews", function(req, res){
         userId: req.user.id
       }
     }
-  }
-  console.log("Where is", where);
-  Review.findAll(where).then(function(reviews) {
-    console.log(reviews);
-    res.render('yourReviews', {
-      msg: req.query.msg,
-      user: req.user,
-      isAuthenticated: req.isAuthenticated(),
-      reviews: reviews //left side = handlebars right side = data variable
+    console.log("Where is", where);
+    Review.findAll(where).then(function(reviews) {
+      console.log(reviews);
+      res.render('yourReviews', {
+        msg: req.query.msg,
+        user: req.user,
+        isAuthenticated: req.isAuthenticated(),
+        reviews: reviews //left side = handlebars right side = data variable
+      });
     });
-  });
+  } else {
+    res.redirect("/");
+  }
 });
 
 
